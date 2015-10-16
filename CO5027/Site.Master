@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>StunningSnaps | Homepage</title>
+    <title>StunningSnaps</title>
     <link href="Styles/MainStyle.min.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="headerContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
