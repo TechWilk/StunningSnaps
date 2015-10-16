@@ -14,6 +14,7 @@
             <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
             <footer>
+                <small>&copy; 2015: StunningSnaps</small>
                 <nav class="validation">
                     <p>Validate:</p>
                     <ul>
