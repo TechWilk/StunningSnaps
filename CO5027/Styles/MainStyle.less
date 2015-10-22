@@ -1,7 +1,31 @@
-﻿// Variables
+﻿// WebFonts
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
+// Variables
+@logoFontColor: @headerFontColor;
+
+@headerBackgroundColor: #222;
+@headerFontColor: #fff;
+@headerFontFamily: 'Roboto', Helvetica, Airel, sans-serif;
+@headerLinkColor: @headerFontColor;
+
+@linkColor: #08f;
+@fontFamily: 'Roboto', Helvetica, Airel, sans-serif;
+
+@footerBackgroundColor: @headerBackgroundColor;
+@footerFontColor: @headerFontColor;
+@footerFontFamily: @headerFontFamily;
+@footerLinkColor: @headerLinkColor;
+@footerLinkHoverColor: lighten(@footerBackgroundColor, 10%);
 
 // Mixins
+.backgroundGradient(@colorTop, @colorBottom) {
+    background-color: @colorBottom;
+    background: -webkit-linear-gradient(@colorTop, @colorBottom); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(@colorTop, @colorBottom); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(@colorTop, @colorBottom); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(@colorTop, @colorBottom);
+}
 
 
 // Reset
@@ -10,4 +34,222 @@
     padding: 0;
 }
 
-// Style
+// Styling
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Defaults
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+body {
+  font-family: @fontFamily;
+}
+
+a {
+  color: @linkColor;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.current {
+    background-color: #333;
+  }
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+h1 {
+  margin-top: 10px;
+}
+
+h2 {
+  margin-top: 5px;
+}
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Header
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+header {
+  background-color: @headerBackgroundColor;
+  color: @headerFontColor;
+  font-family: @headerFontFamily;
+
+  a {
+    color: @headerLinkColor;
+    text-decoration: none;
+
+    img{
+      vertical-align: middle;
+      }
+
+    h1 {
+      vertical-align: middle;
+      color: @logoFontColor;
+      display: inline;
+      padding-top: 15px;
+    }
+  }
+
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Main Nav
+
+  nav.main ul {
+    display: inline-block;
+    width: 100%;
+
+    li {
+      list-style: none;
+
+      a {
+        display: block;
+        padding: 10px 15px;
+
+        &:hover {
+          text-decoration: none;
+          background-color: #333;
+        }
+      }
+    }
+  }
+}
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Body
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+section a.item {
+  display: inline-block;
+  margin: 5px;
+
+  figure {
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      position: absolute;
+      width:100%;
+      .backgroundGradient(rgba(0,0,0,0),rgba(0,0,0,0.75));
+      color: white;
+      padding: 10px 20px;
+
+      opacity: 0;
+      bottom: 0;
+      left: -30%;
+    }
+
+    &:hover figcaption {
+      opacity: 1;
+      left: 0;
+    }
+  }
+
+  small {
+    text-align: right;
+  }
+
+  p {
+
+  }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Footer
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+footer {
+  background-color: @footerBackgroundColor;
+  color: @footerFontColor;
+  font-family: @footerFontFamily;
+  width:100%;
+
+  a {
+    color: @footerLinkColor;
+    text-decoration: none;
+  }
+
+  .copyright {
+    text-align: center;
+    padding: 15px;
+  }
+
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Validation Nav
+
+  nav.validation {
+    text-align: center;
+    padding: 15px;
+    background-color: lighten(@footerBackgroundColor, 5%);
+
+    h3 {
+      padding-top:5px;
+      padding-bottom: 5px;
+      font-size: 90%;
+    }
+
+    li {
+      list-style: none;
+      display: inline-block;
+
+      a {
+        display: block;
+        padding: 8px 14px;
+        border-radius: 3px;
+
+        &:hover {
+          text-decoration: none;
+          background-color: @footerLinkHoverColor;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Responsive - Media Queries
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// add margin above and below vertical navigation menu for stmall screen sizes
+@media (max-width: 320px) {
+  header nav.main ul li {
+    &:first-of-type a {
+      margin-top: 10px;
+    }
+
+    &:last-of-type a {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (min-width: 320px) {
+
+  header nav.main ul {
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      a {
+        display: block;
+        padding: 12px 20px;
+      }
+    }
+  }
+
+}
