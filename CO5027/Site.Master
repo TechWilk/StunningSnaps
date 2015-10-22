@@ -13,7 +13,7 @@
     <form id="form1" runat="server">
         <div>
             <header>
-                <a class="logo" href="~/#" runat="server">
+                <a class="logo" href="~/" runat="server">
                     <img alt="StunningSnaps logo - [more description here]" src="~/Images/Logo.png" width="80" height="80" runat="server" />
                     <h1>StunningSnaps</h1>
                 </a>
