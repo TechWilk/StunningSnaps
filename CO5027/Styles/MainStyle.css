@@ -58,21 +58,21 @@ header nav.main ul li a:hover {
   text-decoration: none;
   background-color: #333;
 }
-section a.item {
+section.photos a.item {
   display: inline-block;
   margin: 5px;
 }
-section a.item figure {
+section.photos a.item figure {
   display: block;
   position: relative;
   overflow: hidden;
 }
-section a.item figure img {
+section.photos a.item figure img {
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
-section a.item figure figcaption {
+section.photos a.item figure figcaption {
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.75);
@@ -89,11 +89,11 @@ section a.item figure figcaption {
   bottom: 0;
   left: -30%;
 }
-section a.item figure:hover figcaption {
+section.photos a.item figure:hover figcaption {
   opacity: 1;
   left: 0;
 }
-section a.item small {
+section.photos a.item small {
   text-align: right;
 }
 footer {
@@ -151,5 +151,38 @@ footer nav.validation li a:hover {
   header nav.main ul li a {
     display: block;
     padding: 12px 20px;
+  }
+}
+@media (min-width: 430px) {
+  section.photos {
+    line-height: 0;
+    -webkit-column-gap: 0px;
+    -moz-column-gap: 0px;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    column-gap: 0px;
+  }
+}
+@media (min-width: 610px) {
+  header nav.main {
+    display: inline-block;
+  }
+  header nav.main ul {
+    text-align: right;
+  }
+}
+@media (min-width: 700px) {
+  section.photos {
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+@media (min-width: 900px) {
+  section.photos {
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
   }
 }
