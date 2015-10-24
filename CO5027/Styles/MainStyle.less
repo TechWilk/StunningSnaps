@@ -126,7 +126,7 @@ header {
 // Body
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-section.photos a.item {
+section.photos .item {
     display: inline-block;
     margin: 5px;
 
@@ -149,7 +149,6 @@ section.photos a.item {
             padding: 10px 20px;
             opacity: 0;
             bottom: 0;
-            left: -30%;
         }
 
         &:hover figcaption {
@@ -261,15 +260,19 @@ footer {
     }
 }
 
+// respond footer onto single line
 @media (min-width: 500px) {
     footer {
-        
+        display: flex;
+        justify-content: space-between;
+
         .copyright {
-            display: inline-block;
+            padding: 12px 20px;
         }
 
         nav.validation {
-            display: inline-block;
+            padding: 5px 20px;
+            float: right;
 
             h3, ul {
                 display: inline-block;

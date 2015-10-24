@@ -58,21 +58,21 @@ header nav.main ul li a:hover {
   text-decoration: none;
   background-color: #333;
 }
-section.photos a.item {
+section.photos .item {
   display: inline-block;
   margin: 5px;
 }
-section.photos a.item figure {
+section.photos .item figure {
   display: block;
   position: relative;
   overflow: hidden;
 }
-section.photos a.item figure img {
+section.photos .item figure img {
   display: block;
   width: 100%;
   height: auto;
 }
-section.photos a.item figure figcaption {
+section.photos .item figure figcaption {
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.75);
@@ -87,13 +87,12 @@ section.photos a.item figure figcaption {
   padding: 10px 20px;
   opacity: 0;
   bottom: 0;
-  left: -30%;
 }
-section.photos a.item figure:hover figcaption {
+section.photos .item figure:hover figcaption {
   opacity: 1;
   left: 0;
 }
-section.photos a.item small {
+section.photos .item small {
   text-align: right;
 }
 footer {
@@ -165,11 +164,16 @@ footer nav.validation li a:hover {
   }
 }
 @media (min-width: 500px) {
+  footer {
+    display: flex;
+    justify-content: space-between;
+  }
   footer .copyright {
-    display: inline-block;
+    padding: 12px 20px;
   }
   footer nav.validation {
-    display: inline-block;
+    padding: 5px 20px;
+    float: right;
   }
   footer nav.validation h3,
   footer nav.validation ul {
