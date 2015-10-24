@@ -164,6 +164,18 @@ footer nav.validation li a:hover {
     column-gap: 0px;
   }
 }
+@media (min-width: 500px) {
+  footer .copyright {
+    display: inline-block;
+  }
+  footer nav.validation {
+    display: inline-block;
+  }
+  footer nav.validation h3,
+  footer nav.validation ul {
+    display: inline-block;
+  }
+}
 @media (min-width: 610px) {
   header nav.main {
     display: inline-block;
@@ -172,7 +184,7 @@ footer nav.validation li a:hover {
     text-align: right;
   }
 }
-@media (min-width: 700px) {
+@media (min-width: 650px) {
   section.photos {
     -moz-column-count: 3;
     -webkit-column-count: 3;
