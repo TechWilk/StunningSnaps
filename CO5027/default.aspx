@@ -16,10 +16,8 @@
         <a class="item" href="#" title="More info">
             <figure>
                 <img alt="Some image" src="files/images/image1.jpg" height="1600" width="2560" />
-                <figcaption>Description about image</figcaption>
+                <figcaption>Description about image<span>1000x100</span></figcaption>
             </figure>
-            <small>1000x100</small>
-            <p>From £5.00</p>
         </a>
         <!-- /.item -->
 
