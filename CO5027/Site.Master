@@ -6,7 +6,7 @@
 <head runat="server">
     <title>StunningSnaps</title>
     <link href="Styles/MainStyle.min.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <asp:ContentPlaceHolder ID="headerContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
 </head>
