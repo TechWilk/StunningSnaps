@@ -10,36 +10,34 @@
         <h2>Catergories</h2>
         <p>Main page content</p>
     </section>
-    <section class="photos">
+    <section>
         <h2>Photographs</h2>
 
-        <a class="item" href="#" title="More info">
-            <figure>
-                <img alt="Some image" src="files/images/image1.jpg" height="1600" width="2560" />
-                <figcaption>Description about image<span>1000x100</span></figcaption>
-            </figure>
-        </a>
-        <!-- /.item -->
+        <div class="photos">
+            <a class="item" href="#" title="More info">
+                <figure>
+                    <img alt="Some image" src="files/images/image1.jpg" height="1600" width="2560" />
+                    <figcaption>Description about image<span>1000x100</span></figcaption>
+                </figure>
+            </a>
+            <!-- /.item -->
 
-        <a class="item" href="#" title="More info">
-            <figure>
-                <img alt="Some image" src="files/images/image2.png" height="1200" width="1920" />
-                <figcaption>Description about image</figcaption>
-            </figure>
-            <small>532x345</small>
-            <p>Link to buy image</p>
-        </a>
-        <!-- /.item -->
+            <a class="item" href="#" title="More info">
+                <figure>
+                    <img alt="Some image" src="files/images/image2.png" height="1200" width="1920" />
+                    <figcaption>Description about image<span>543x4895</span></figcaption>
+                </figure>
+            </a>
+            <!-- /.item -->
 
-        <a class="item" href="#" title="More info">
-            <figure>
-                <img alt="Some image" src="files/images/image3.jpg" height="1333" width="1999" />
-                <figcaption>Description about image</figcaption>
-            </figure>
-            <small>876x954</small>
-            <p>Find out more information</p>
-        </a>
-        <!-- /.item -->
+            <a class="item" href="#" title="More info">
+                <figure>
+                    <img alt="Some image" src="files/images/image3.jpg" height="1333" width="1999" />
+                    <figcaption>Description about image<span>893x2078</span></figcaption>
+                </figure>
+            </a>
+            <!-- /.item -->
+        </div>
 
     </section>
 </asp:Content>
