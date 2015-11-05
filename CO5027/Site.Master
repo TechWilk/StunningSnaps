@@ -15,14 +15,14 @@
         <div>
             <header>
                 <a class="logo" href="~/" runat="server">
-                    <img alt="StunningSnaps logo - [more description here]" src="~/Images/Logo.png" width="80" height="80" runat="server" />
+                    <img alt="StunningSnaps logo - [more description here]" src="~/files/images/logo.png" width="60" height="60" runat="server" />
                     <h1>StunningSnaps</h1>
                 </a>
                 <nav class="main">
                     <ul>
                         <li><a href="~/" runat="server">Browse</a></li>
-                        <li><a href="~/#" runat="server">Checkout</a></li>
-                        <li><a href="~/#" runat="server">Login</a></li>
+                        <li><a href="#" runat="server">Checkout</a></li>
+                        <li><a href="#" runat="server">Login</a></li>
                         <li><a href="~/contact.aspx" runat="server">Contact</a></li>
                     </ul>
                 </nav>

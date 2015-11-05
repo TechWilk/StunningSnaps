@@ -7,10 +7,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section>
-        <h2>Catergories</h2>
-        <p>Main page content</p>
-    </section>
-    <section>
         <h2>Photographs</h2>
 
         <div class="photos">
