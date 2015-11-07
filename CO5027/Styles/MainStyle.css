@@ -120,6 +120,7 @@ header nav.main ul li a:hover {
   height: auto;
 }
 .photos .item figure figcaption {
+  transition: opacity ease-out 0.12s;
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.75);
