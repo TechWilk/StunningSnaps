@@ -43,7 +43,7 @@
             </div>
             <div class="map">
                 <h2>Map</h2>
-                <img src="/files/images/map.png" height="905" width="1715" alt="Map with location of SuperSnaps pinpointed" />
+                <img src="files/images/map.png" height="905" width="1715" alt="Map with location of SuperSnaps pinpointed" />
             </div>
         </div>
     </section>
