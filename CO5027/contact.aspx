@@ -18,7 +18,7 @@
                 <p>The office is open 9am - 5pm weekdays.</p>
                 <p>We aim to respond to all contact within 48 hours.</p>
             </div>
-            <div>
+            <div class="email">
                 <h3>Email</h3>
                 <div>
                     <asp:Label ID="lblName" runat="server" Text="Name" AssociatedControlID="txtName"></asp:Label>

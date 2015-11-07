@@ -101,7 +101,7 @@ textarea,
 input {
     font-family: @fontFamily;
     transition: background-color linear 0.15s;
-    padding: 5px;
+    padding: 10px;
     display: block;
     width: 100%;
     font-size: 1.05em;
@@ -218,8 +218,8 @@ header {
 }
 
 
-section div {
-        margin: 0 20px 30px 20px;
+section > div {
+    margin: 0 20px 30px 20px;
 }
 
 
@@ -227,11 +227,15 @@ section div {
     margin-left: auto;
     margin-right: auto;
     max-width: 900px;
+    padding: 0 20px 30px 20px;
 
-    div {
-        margin: 0 20px 30px 20px;
-        max-width: 900px;
+    & > div {
+        margin: 0;
     }
+}
+
+.email div {
+    margin: 15px 5px;
 }
 
 .columns {
@@ -242,8 +246,8 @@ section div {
     flex-wrap: wrap;
 
     .map {
-        
         flex-grow: 1;
+
         img {
             display: block;
             max-width: 100%;
@@ -351,7 +355,7 @@ footer {
 
     textarea,
     input {
-        min-width: 320px;
+        min-width: 300px;
     }
 }
 
@@ -389,6 +393,9 @@ footer {
             text-align: right;
         }
     }
+}
+
+@media (min-width: 860px) {
 
     .columns.two {
         flex-direction: row;

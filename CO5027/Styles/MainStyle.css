@@ -43,7 +43,7 @@ textarea,
 input {
   font-family: 'Roboto', Helvetica, Airel, sans-serif;
   transition: background-color linear 0.15s;
-  padding: 5px;
+  padding: 10px;
   display: block;
   width: 100%;
   font-size: 1.05em;
@@ -144,17 +144,20 @@ header nav.main ul li a:hover {
   opacity: 1;
   left: 0;
 }
-section div {
+section > div {
   margin: 0 20px 30px 20px;
 }
 .page {
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
+  padding: 0 20px 30px 20px;
 }
-.page div {
-  margin: 0 20px 30px 20px;
-  max-width: 900px;
+.page > div {
+  margin: 0;
+}
+.email div {
+  margin: 15px 5px;
 }
 .columns {
   width: 100%;
@@ -237,7 +240,7 @@ footer nav.validation li a:hover {
   }
   textarea,
   input {
-    min-width: 320px;
+    min-width: 300px;
   }
 }
 @media (min-width: 500px) {
@@ -271,6 +274,8 @@ footer nav.validation li a:hover {
   header nav.main ul {
     text-align: right;
   }
+}
+@media (min-width: 860px) {
   .columns.two {
     flex-direction: row;
     flex-grow: 1;
