@@ -92,6 +92,11 @@ h3 {
     padding-left: 5px;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 textarea,
 input {
     font-family: @fontFamily;
@@ -99,6 +104,7 @@ input {
     padding: 5px;
     display: block;
     width: 100%;
+    font-size: 1.05em;
 
     &:focus {
         background-color: #fafafa;
@@ -167,6 +173,7 @@ header {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 100%;
 
     .item {
         margin: 5px;
@@ -211,15 +218,48 @@ header {
 
 
 section div {
-    margin: 20px;
-    margin-bottom: 30px;
+        margin: 0 20px 30px 20px;
 }
 
-.columns.two {
+
+.page {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+
+    div {
+        margin: 0 20px 30px 20px;
+        max-width: 900px;
+    }
+}
+
+.columns {
     width: 100%;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .map {
+        
+        flex-grow: 1;
+        img {
+            display: block;
+            max-width: 100%;
+        }
+    }
+}
+
+.contact-details {
+    p span {
+        margin-top: 5px;
+        padding: 15px;
+        display: block;
+        background: #f5f5f5;
+        font-size: 1.05em;
+        line-height: 1.4;
+        border-left: 5px solid lighten(@footerBackgroundColor, 25%);
+    }
 }
 
 
@@ -307,6 +347,11 @@ footer {
             }
         }
     }
+
+    textarea,
+    input {
+        min-width: 320px;
+    }
 }
 
 // respond footer onto single line
@@ -328,6 +373,11 @@ footer {
             }
         }
     }
+
+    textarea,
+    input {
+        min-width: 400px;
+    }
 }
 
 @media (min-width: 710px) {
@@ -343,5 +393,6 @@ footer {
         flex-direction: row;
         flex-grow: 1;
         flex-basis: 600px;
+        align-items: stretch;
     }
 }

@@ -33,6 +33,22 @@
                 </figure>
             </a>
             <!-- /.item -->
+
+            <a class="item" href="#" title="More info">
+                <figure>
+                    <img alt="Some image" src="files/images/image4.jpg" height="2736" width="3648" />
+                    <figcaption>Description about image<span>3648x2736</span></figcaption>
+                </figure>
+            </a>
+            <!-- /.item -->
+
+            <a class="item" href="#" title="More info">
+                <figure>
+                    <img alt="Some image" src="files/images/image5.jpg" height="2592" width="4608" />
+                    <figcaption>Description about image<span>2592x4608</span></figcaption>
+                </figure>
+            </a>
+            <!-- /.item -->
         </div>
 
     </section>
