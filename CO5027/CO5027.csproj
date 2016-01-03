@@ -69,6 +69,8 @@
     <Content Include="contact.aspx" />
     <Content Include="default.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Site.Master" />
     <Content Include="Styles\MainStyle.css">
       <DependentUpon>MainStyle.less</DependentUpon>

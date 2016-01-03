@@ -13,6 +13,15 @@ namespace CO5027 {
     public partial class contact {
         
         /// <summary>
+        /// pnlContactForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlContactForm;
+        
+        /// <summary>
         /// lblName control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace CO5027 {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
+        /// EmailRegularExpressionValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailRegularExpressionValidator;
+        
+        /// <summary>
         /// lblEmailConfirm control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,15 @@ namespace CO5027 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmailConfirm;
+        
+        /// <summary>
+        /// EmailCompareValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator EmailCompareValidator;
         
         /// <summary>
         /// lblMessage control.

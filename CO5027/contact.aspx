@@ -20,25 +20,33 @@
             </div>
             <div class="email">
                 <h3>Email</h3>
-                <div>
-                    <asp:Label ID="lblName" runat="server" Text="Name" AssociatedControlID="txtName"></asp:Label>
-                    <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
-                </div>
-                <div>
-                    <asp:Label ID="lblEmail" runat="server" Text="Email" AssociatedControlID="txtEmail"></asp:Label>
-                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                </div>
+                <asp:Panel ID="pnlContactForm" runat="server">
+                    <div>
+                        <asp:Label ID="lblName" runat="server" Text="Name" AssociatedControlID="txtName"></asp:Label>
+                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="Name is required." ControlToValidate="txtName" runat="server" Display="Dynamic" />
+                    </div>
+                    <div>
+                        <asp:Label ID="lblEmail" runat="server" Text="Email" AssociatedControlID="txtEmail"></asp:Label>
+                        <asp:TextBox ID="txtEmail" placeholder="your@email.address" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="Email address is required." ControlToValidate="txtEmail" runat="server" Display="Dynamic" />
+                        <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Invalid email address. Please enter a valid email address." Display="Dynamic" ControlToValidate="txtEmail" ValidationExpression="\w+(.+\w+)*[@]\w+([.]\w+)+"></asp:RegularExpressionValidator>
+                    </div>
 
-                <div>
-                    <asp:Label ID="lblEmailConfirm" runat="server" Text="Confirm email" AssociatedControlID="txtEmailConfirm"></asp:Label>
-                    <asp:TextBox ID="txtEmailConfirm" runat="server"></asp:TextBox>
-                </div>
-                <div>
-                    <asp:Label ID="lblMessage" runat="server" Text="Message" AssociatedControlID="txtMessage"></asp:Label>
-                    <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>
-                </div>
+                    <div>
+                        <asp:Label ID="lblEmailConfirm" runat="server" Text="Confirm email" AssociatedControlID="txtEmailConfirm"></asp:Label>
+                        <asp:TextBox ID="txtEmailConfirm" placeholder="your@email.address" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="Email address is required." ControlToValidate="txtEmailConfirm" runat="server" Display="Dynamic" />
+                        <asp:CompareValidator ID="EmailCompareValidator" runat="server" ErrorMessage="Email addresses do not match. Please retype them." Display="Dynamic" ControlToCompare="txtEmail" ControlToValidate="txtEmailConfirm"></asp:CompareValidator>
+                    </div>
+                    <div>
+                        <asp:Label ID="lblMessage" runat="server" Text="Message" AssociatedControlID="txtMessage"></asp:Label>
+                        <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="Message is required." ControlToValidate="txtMessage" runat="server" Display="Dynamic" />
+                    </div>
 
-                <asp:Button ID="btnSendEmail" runat="server" Text="Send" OnClick="btnSendEmail_Click" />
+                    <asp:Button ID="btnSendEmail" runat="server" Text="Send" OnClick="btnSendEmail_Click" />
+                </asp:Panel>
                 <asp:Literal ID="litResponseMessage" runat="server"></asp:Literal>
             </div>
             <div class="map">
