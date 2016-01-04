@@ -34,7 +34,7 @@ namespace CO5027
             emailToAdmin += "MESSAGE:" + Environment.NewLine;
             emailToAdmin += customerMessage + Environment.NewLine;
             emailToAdmin += Environment.NewLine;
-            emailToAdmin += "Message sent though SuperSnaps website";
+            emailToAdmin += "Message sent though StunningSnaps website";
 
             string subjectToAdmin = "New message from: " + customerName;
 
@@ -54,7 +54,7 @@ namespace CO5027
             emailToCustomer += "Your message:" + Environment.NewLine;
             emailToCustomer += customerMessage + Environment.NewLine;
             emailToCustomer += Environment.NewLine;
-            emailToCustomer += "Message sent though SuperSnaps website" + Environment.NewLine;
+            emailToCustomer += "Message sent though StunningSnaps website" + Environment.NewLine;
             emailToCustomer += "http://1417800.studentwebserver.co.uk/CO5027";
 
             // Send email to customer
