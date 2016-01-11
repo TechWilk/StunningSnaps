@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Contact | SuperSnaps" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="contact.aspx.cs" Inherits="CO5027.contact" %>
+﻿<%@ Page Title="Contact | StunningSnaps" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="contact.aspx.cs" Inherits="CO5027.contact" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headerContentPlaceHolder" runat="server">
 </asp:Content>
@@ -10,7 +10,7 @@
                 <h3>Contact information</h3>
                 <p>Telephone: <span>01244 321123</span></p>
                 <p>
-                    Address: <span>SuperSnaps Studio<br />
+                    Address: <span>StunningSnaps Studio<br />
                         23 City Road<br />
                         Chester<br />
                         CH1&nbsp;3AE</span>
