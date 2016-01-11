@@ -77,6 +77,7 @@ namespace CO5027
             client.Host = "petyrbaelish.asoshared.com";
             client.Port = 587;
 
+            // Webmail can be accessed using the credentials below at https://wilk.tech/mail
             NetworkCredential credentials = new NetworkCredential("stunningsnaps@wilk.tech", "h$GCA@Vp1(v#");
             client.Credentials = credentials;
 
