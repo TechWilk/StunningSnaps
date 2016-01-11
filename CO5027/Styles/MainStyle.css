@@ -4,7 +4,7 @@
   padding: 0;
 }
 body {
-  font-family: 'Roboto', Helvetica, Airel, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 a {
   color: #08f;
@@ -41,7 +41,7 @@ img {
 }
 textarea,
 input {
-  font-family: 'Roboto', Helvetica, Airel, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   transition: background-color linear 0.15s;
   padding: 10px;
   display: block;
@@ -58,7 +58,7 @@ textarea {
 header {
   background-color: #222;
   color: #fff;
-  font-family: 'Roboto', Helvetica, Airel, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 header a {
   color: #fff;
@@ -175,7 +175,6 @@ section > div {
 .columns .map img,
 .columns .map div {
   display: block;
-  max-width: 100%;
 }
 .columns .map #map {
   height: 350px;
@@ -193,7 +192,7 @@ section > div {
 footer {
   background-color: #222;
   color: #fff;
-  font-family: 'Roboto', Helvetica, Airel, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   width: 100%;
 }
 footer a {

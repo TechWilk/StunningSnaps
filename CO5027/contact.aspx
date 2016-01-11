@@ -51,8 +51,9 @@
             </div>
             <div class="map">
                 <h2>Map</h2>
-                <img id="hide-map" src="files/images/map.png" height="905" width="1715" alt="StunnningSnaps Studios - just next to the canal bridge on City Road.  City road is just off 'The Bars' A5268 rectangular roundabout near Boughton in Chester" />
-                <div id="map" ></div>
+                <div id="map">
+                    <img src="files/images/map.png" height="529" width="1350" alt="StunnningSnaps Studios - just next to the canal bridge on City Road.  City road is just off 'The Bars' A5268 rectangular roundabout near Boughton in Chester" />
+                </div>
             </div>
         </div>
     </section>
