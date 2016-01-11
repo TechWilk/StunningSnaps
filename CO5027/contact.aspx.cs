@@ -41,13 +41,13 @@ namespace CO5027
             // Send email to admin
             if (!sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin))
             {
-                // Update page with error
+                litResponseMessage.Text = "Error sending message.  Please wait for a miniute before trying again.";
             }
 
 
             // format email for customer
 
-            string emailToCustomer = customerName + " thank you for your recient corrispondance with StunningSnaps." + Environment.NewLine;
+            string emailToCustomer = customerName + " thank you for your recient correspondence with StunningSnaps." + Environment.NewLine;
             emailToCustomer += Environment.NewLine;
             emailToCustomer += "For your records we have included a copy of the message you sent us. We aim to respond to all messages within 48 hours." + Environment.NewLine;
             emailToCustomer += Environment.NewLine;
@@ -60,7 +60,7 @@ namespace CO5027
             // Send email to customer
             if (!sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", "Message sent to StunningSnaps", emailToCustomer))
             {
-                // Update page with error
+                litResponseMessage.Text = "Message sent to StunningSnaps.  Unable to copy message for your records, please make a note of your message.";
             }
 
             // Update page to reflect successful sending of email
@@ -90,7 +90,15 @@ namespace CO5027
             msg.Body = emailBody;
             msg.Subject = emailSubject;
 
-            client.Send(msg);
+            try 
+            {
+                client.Send(msg);
+            }
+            catch
+            {
+                return false;
+            }
+            
 
             return true;
         }
