@@ -159,6 +159,9 @@ section > div {
 .email div {
   margin: 15px 5px;
 }
+.email div span {
+  color: red;
+}
 .columns {
   width: 100%;
   display: flex;
@@ -169,9 +172,14 @@ section > div {
 .columns .map {
   flex-grow: 1;
 }
-.columns .map img {
+.columns .map img,
+.columns .map div {
   display: block;
   max-width: 100%;
+}
+.columns .map #map {
+  height: 350px;
+  width: 900px;
 }
 .contact-details p span {
   margin-top: 5px;

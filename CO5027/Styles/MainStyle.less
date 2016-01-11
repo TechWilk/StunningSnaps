@@ -236,6 +236,10 @@ section > div {
 
 .email div {
     margin: 15px 5px;
+
+    span {
+        color:red;
+    }
 }
 
 .columns {
@@ -248,9 +252,13 @@ section > div {
     .map {
         flex-grow: 1;
 
-        img {
+        img, div {
             display: block;
             max-width: 100%;
+        }
+        #map {
+            height:350px;
+            width:900px;
         }
     }
 }

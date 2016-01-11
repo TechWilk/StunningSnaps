@@ -23,19 +23,19 @@
                 <asp:Panel ID="pnlContactForm" runat="server">
                     <div>
                         <asp:Label ID="lblName" runat="server" Text="Name" AssociatedControlID="txtName"></asp:Label>
-                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtName" placeholder="Your Name" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ErrorMessage="Name is required." ControlToValidate="txtName" runat="server" Display="Dynamic" />
                     </div>
                     <div>
                         <asp:Label ID="lblEmail" runat="server" Text="Email" AssociatedControlID="txtEmail"></asp:Label>
-                        <asp:TextBox ID="txtEmail" placeholder="your@email.address" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" placeholder="your@email.address" runat="server" TextMode="Email"></asp:TextBox>
                         <asp:RequiredFieldValidator ErrorMessage="Email address is required." ControlToValidate="txtEmail" runat="server" Display="Dynamic" />
                         <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Invalid email address. Please enter a valid email address." Display="Dynamic" ControlToValidate="txtEmail" ValidationExpression="\w+(.+\w+)*[@]\w+([.]\w+)+"></asp:RegularExpressionValidator>
                     </div>
 
                     <div>
                         <asp:Label ID="lblEmailConfirm" runat="server" Text="Confirm email" AssociatedControlID="txtEmailConfirm"></asp:Label>
-                        <asp:TextBox ID="txtEmailConfirm" placeholder="your@email.address" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtEmailConfirm" placeholder="your@email.address" runat="server" TextMode="Email"></asp:TextBox>
                         <asp:RequiredFieldValidator ErrorMessage="Email address is required." ControlToValidate="txtEmailConfirm" runat="server" Display="Dynamic" />
                         <asp:CompareValidator ID="EmailCompareValidator" runat="server" ErrorMessage="Email addresses do not match. Please retype them." Display="Dynamic" ControlToCompare="txtEmail" ControlToValidate="txtEmailConfirm"></asp:CompareValidator>
                     </div>
@@ -51,8 +51,11 @@
             </div>
             <div class="map">
                 <h2>Map</h2>
-                <img src="files/images/map.png" height="905" width="1715" alt="Map with location of SuperSnaps pinpointed" />
+                <img id="hide-map" src="files/images/map.png" height="905" width="1715" alt="StunnningSnaps Studios - just next to the canal bridge on City Road.  City road is just off 'The Bars' A5268 rectangular roundabout near Boughton in Chester" />
+                <div id="map" ></div>
             </div>
         </div>
     </section>
+    <script src="Scripts/google-maps.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3ewQvE_eAM-9yhH6IPCCds3h1nA2FfYY&callback=initMap"></script>
 </asp:Content>

@@ -83,11 +83,9 @@ namespace CO5027
             MailMessage msg = new MailMessage("stunningsnaps@wilk.tech", recipient);
 
             MailAddressCollection replyToAddresses = new MailAddressCollection();
-
             MailAddress replyToMailAddress = new MailAddress(replyTo);
-            replyToAddresses.Add(replyToMailAddress);
 
-            //msg.ReplyToList = replyToAddresses;
+            msg.ReplyToList.Add(replyToMailAddress);
 
             msg.Body = emailBody;
             msg.Subject = emailSubject;
