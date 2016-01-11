@@ -21,8 +21,8 @@
                 <nav class="main">
                     <ul>
                         <li><a href="~/" runat="server">Browse</a></li>
-                        <li><a href="#" runat="server">Checkout</a></li>
-                        <li><a href="#" runat="server">Login</a></li>
+                        <li><a href="checkout.aspx" runat="server">Checkout</a></li>
+                        <li><a href="~/user/" runat="server">Login</a></li>
                         <li><a href="~/contact.aspx" runat="server">Contact</a></li>
                     </ul>
                 </nav>
