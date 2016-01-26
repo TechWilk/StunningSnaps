@@ -69,7 +69,15 @@
     <Content Include="checkout.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="files\images\1.jpg" />
+    <Content Include="files\images\2.jpg" />
+    <Content Include="files\images\4.jpg" />
+    <Content Include="files\images\5.JPG" />
+    <Content Include="files\images\6.jpg" />
+    <Content Include="files\images\logo.png" />
+    <Content Include="files\images\map.PNG" />
     <Content Include="packages.config" />
+    <Content Include="photo.aspx" />
     <Content Include="Scripts\google-maps.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -122,6 +130,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="photo.aspx.cs">
+      <DependentUpon>photo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="photo.aspx.designer.cs">
+      <DependentUpon>photo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
