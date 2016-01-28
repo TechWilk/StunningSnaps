@@ -19,7 +19,7 @@ namespace CO5027.user
         {
             var name = txtName.Text;
 
-            if (uploadImage())
+            if (uploadImage(txtName.Text, txtDescription.Text))
             {
                 txtName.Text = "";
                 txtDescription.Text = "";
@@ -27,7 +27,7 @@ namespace CO5027.user
             }
         }
 
-        private bool uploadImage()
+        private bool uploadImage(string name, string description)
         {
             bool success = false;
             string fileExtention = System.IO.Path.GetExtension(fUplPictureUpload.FileName).ToLower();
@@ -41,60 +41,38 @@ namespace CO5027.user
                     int width = img.Width;
 
                     // TODO: save record to db
-                    //db_1417800 db = new db_1417800();
+                    DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                    Product product = new Product();
 
+                    product.Archived = false;
+                    product.Name = name;
+                    product.Description = description;
+                    product.InitialHeight = height;
+                    product.InitialWidth = width;
 
-                    // save image to disk
+                    db.Products.Add(product);
+                    db.SaveChanges();
 
-                    string path = Server.MapPath("~/files/images/original/");
+                    string filename = product.Id.ToString();
 
-                    // resize img's - prevent enlargening
-                    int smallImgMaxWidth = 600;
-                    int smallImgMaxHeight = 600;
-                    int mediumImgMaxWidth = 1100;
-                    int mediumImgMaxHeight = 1100;
-                    int largeImgMaxWidth = 2000;
-                    int largeImgMaxHeight = 2000;
+                    // save original image to disk
 
-                    System.Drawing.Image smallImg = img;
-                    System.Drawing.Image mediumImg = img;
-                    System.Drawing.Image largeImg = img;
-
-
-                    if (width > smallImgMaxHeight || height > smallImgMaxHeight)
-                    {
-                        smallImg = ImageManipulation.ResizeImage(img, smallImgMaxWidth, smallImgMaxHeight);
-                    }
-
-                    if (width > mediumImgMaxWidth || height > mediumImgMaxHeight)
-                    {
-                        mediumImg = ImageManipulation.ResizeImage(img, mediumImgMaxWidth, mediumImgMaxHeight);
-                    }
-
-                    if (width > largeImgMaxWidth || height > largeImgMaxHeight)
-                    {
-                        largeImg = ImageManipulation.ResizeImage(img, largeImgMaxWidth, largeImgMaxHeight);
-                    }
-
-                    string filename = "1";  // TODO: grab record id from db
-
-                    // ~~~~ TODO: watermark images ~~~~
-
-                    // original
                     img.Save(Server.MapPath("~/files/images/original/" + filename + fileExtention));
 
-                    // resized images
-                    // large
-                    largeImg.Save(Server.MapPath("~/files/images/watermarked/" + filename + "-lg.jpg"), System.Drawing.Imaging.ImageFormat.Jpeg);
+                    // save watermarked images to disk
 
-                    //// large
-                    mediumImg.Save(Server.MapPath("~/files/images/watermarked/" + filename + "-md.jpg"), System.Drawing.Imaging.ImageFormat.Jpeg);
+                    if (ImageProcessing.SaveWatermarkedImages(img, product.Id))
+                    {
+                        success = true;
+                        return success;
+                    }
+                    else
+                    {
+                        success = false;
+                        litFeedback.Text = "Unable to process image, please go to <a href='manage.aspx'>Admin Panel</a> and try again.";
+                        return success;
 
-                    //// small
-                    smallImg.Save(Server.MapPath("~/files/images/watermarked/" + filename + "-sm.jpg"), System.Drawing.Imaging.ImageFormat.Jpeg);
-
-
-                    success = true;
+                    }
                 }
                 catch
                 {

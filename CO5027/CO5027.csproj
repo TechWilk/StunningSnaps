@@ -43,11 +43,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +79,16 @@
     <Content Include="checkout.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="EntityDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityDataModel.edmx</DependentUpon>
+      <LastGenOutput>EntityDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityDataModel.edmx</DependentUpon>
+      <LastGenOutput>EntityDataModel.cs</LastGenOutput>
+    </Content>
     <Content Include="files\images\1.jpg" />
     <Content Include="files\images\2.jpg" />
     <Content Include="files\images\4.jpg" />
@@ -76,6 +96,30 @@
     <Content Include="files\images\6.jpg" />
     <Content Include="files\images\logo.png" />
     <Content Include="files\images\map.PNG" />
+    <Content Include="files\images\original\1.jpg" />
+    <Content Include="files\images\original\2.jpg" />
+    <Content Include="files\images\original\4.jpg" />
+    <Content Include="files\images\original\5.jpg" />
+    <Content Include="files\images\original\6.jpg" />
+    <Content Include="files\images\original\7.jpg" />
+    <Content Include="files\images\watermarked\1-lg.jpg" />
+    <Content Include="files\images\watermarked\1-md.jpg" />
+    <Content Include="files\images\watermarked\1-sm.jpg" />
+    <Content Include="files\images\watermarked\2-lg.jpg" />
+    <Content Include="files\images\watermarked\2-md.jpg" />
+    <Content Include="files\images\watermarked\2-sm.jpg" />
+    <Content Include="files\images\watermarked\4-lg.jpg" />
+    <Content Include="files\images\watermarked\4-md.jpg" />
+    <Content Include="files\images\watermarked\4-sm.jpg" />
+    <Content Include="files\images\watermarked\5-lg.jpg" />
+    <Content Include="files\images\watermarked\5-md.jpg" />
+    <Content Include="files\images\watermarked\5-sm.jpg" />
+    <Content Include="files\images\watermarked\6-lg.jpg" />
+    <Content Include="files\images\watermarked\6-md.jpg" />
+    <Content Include="files\images\watermarked\6-sm.jpg" />
+    <Content Include="files\images\watermarked\7-lg.jpg" />
+    <Content Include="files\images\watermarked\7-md.jpg" />
+    <Content Include="files\images\watermarked\7-sm.jpg" />
     <Content Include="packages.config" />
     <Content Include="photo.aspx" />
     <Content Include="Scripts\google-maps.js" />
@@ -89,6 +133,13 @@
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
+    </Content>
+    <EntityDeploy Include="EntityDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EntityDataModel.edmx.diagram">
+      <DependentUpon>EntityDataModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -105,6 +156,7 @@
     <Content Include="user\add.aspx" />
     <Content Include="user\default.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="user\manage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -129,16 +181,35 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EntityDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageManipulation.cs" />
+    <Compile Include="Models\ImageProcessing.cs" />
     <Compile Include="photo.aspx.cs">
       <DependentUpon>photo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="photo.aspx.designer.cs">
       <DependentUpon>photo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -169,12 +240,20 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="user\manage.aspx.cs">
+      <DependentUpon>manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\manage.aspx.designer.cs">
+      <DependentUpon>manage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="files\images\original\" />
-    <Folder Include="files\images\watermarked\" />
     <Folder Include="Styles\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

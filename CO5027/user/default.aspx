@@ -5,6 +5,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section class="page">
         <h2>User</h2>
-        <a href="~/user/add.aspx" runat="server">Add image</a>
+        <ul>
+            <li>
+                <a href="~/user/add.aspx" runat="server">Add image</a>
+
+            </li>
+            <li>
+                <a href="~/user/manage.aspx" runat="server">Manage Images</a>
+
+            </li>
+        </ul>
+
     </section>
 </asp:Content>
