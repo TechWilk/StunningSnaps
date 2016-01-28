@@ -156,6 +156,7 @@
     <Content Include="user\add.aspx" />
     <Content Include="user\default.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="user\download.aspx" />
     <Content Include="user\manage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -239,6 +240,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\download.aspx.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\download.aspx.designer.cs">
+      <DependentUpon>download.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\manage.aspx.cs">
       <DependentUpon>manage.aspx</DependentUpon>
