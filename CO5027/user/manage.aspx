@@ -5,6 +5,6 @@
     <section class="page">
         <h2>Manage Photos</h2>
 
-        <asp:Button ID="btnReprocessImages" runat="server" Text="Reprocess Images" OnClick="btnReprocessImages_Click" />
+        <asp:Button ID="btnReprocessImages" runat="server" Text="Reprocess All Images" OnClick="btnReprocessImages_Click" />
     </section>
 </asp:Content>
