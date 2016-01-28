@@ -72,7 +72,7 @@
     <Content Include="files\images\1.jpg" />
     <Content Include="files\images\2.jpg" />
     <Content Include="files\images\4.jpg" />
-    <Content Include="files\images\5.JPG" />
+    <Content Include="files\images\5.jpg" />
     <Content Include="files\images\6.jpg" />
     <Content Include="files\images\logo.png" />
     <Content Include="files\images\map.PNG" />
@@ -102,6 +102,7 @@
     <Content Include="Styles\MainStyle.min.css">
       <DependentUpon>MainStyle.css</DependentUpon>
     </Content>
+    <Content Include="user\add.aspx" />
     <Content Include="user\default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="Web.config" />
@@ -131,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageManipulation.cs" />
     <Compile Include="photo.aspx.cs">
       <DependentUpon>photo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -145,6 +147,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="user\add.aspx.cs">
+      <DependentUpon>add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\add.aspx.designer.cs">
+      <DependentUpon>add.aspx</DependentUpon>
     </Compile>
     <Compile Include="user\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -163,7 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="files\images\original\" />
+    <Folder Include="files\images\watermarked\" />
     <Folder Include="Styles\Images\" />
   </ItemGroup>
   <PropertyGroup>
