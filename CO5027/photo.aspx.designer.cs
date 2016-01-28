@@ -10,24 +10,15 @@
 namespace CO5027 {
     
     
-    public partial class _default {
+    public partial class photo {
         
         /// <summary>
-        /// photosRepeater control.
+        /// imgPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater photosRepeater;
-        
-        /// <summary>
-        /// CO5027SqlDataSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource CO5027SqlDataSource;
+        protected global::System.Web.UI.WebControls.Image imgPhoto;
     }
 }
