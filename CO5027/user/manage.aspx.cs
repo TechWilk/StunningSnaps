@@ -12,7 +12,10 @@ namespace CO5027.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            var products = db.Products.ToList();
+            rptPhotos.DataSource = products;
+            rptPhotos.DataBind();
         }
 
         protected void btnReprocessImages_Click(object sender, EventArgs e)
@@ -25,6 +28,11 @@ namespace CO5027.user
                 System.Drawing.Image img = System.Drawing.Image.FromFile(path);
                 ImageProcessing.SaveWatermarkedImages(img, id);
             }
+        }
+
+        protected void btnArchive_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
