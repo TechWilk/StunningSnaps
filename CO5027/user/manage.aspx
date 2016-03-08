@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="manage.aspx.cs" Inherits="CO5027.user.manage" %>
+﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="manage.aspx.cs" Inherits="CO5027.user.manage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headerContentPlaceHolder" runat="server">
 </asp:Content>
@@ -6,7 +6,7 @@
     <section class="page">
         <h2>Manage Photos</h2>
 
-        <asp:Repeater ID="rptPhotos" runat="server">
+        <asp:Repeater ID="rptPhotos" runat="server" OnItemCommand="rptPhotos_ItemCommand">
             <HeaderTemplate>
                 <table>
                     <th>
@@ -24,7 +24,7 @@
                         <%# Eval("Name") %>
                     </td>
                     <td>
-                        <asp:Button ID="btnArchive" runat="server" Text="Archive" OnClick="btnArchive_Click" />
+                        <asp:Button ID="btnArchive" runat="server" Text='<%# ((bool)Eval("Archived")) ? "Unarchive" : "Archive"  %>' CommandArgument='<%# Eval("Id") %>' />
                     </td>
                 </tr>
             </ItemTemplate>

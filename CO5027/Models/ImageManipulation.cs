@@ -13,7 +13,7 @@ namespace CO5027.Models
 {
     public static class ImageManipulation
     {
-        public static Image SimpleResize(Image i, int width, int height)
+        public static System.Drawing.Image SimpleResize(System.Drawing.Image i, int width, int height)
         {
             //create a bitmap image with the required width and height
             Bitmap resized = new Bitmap(width, height);
@@ -34,7 +34,7 @@ namespace CO5027.Models
             return resized;
         }
 
-        public static Image ResizeImage(Image i, int MaxWidth, int MaxHeight)
+        public static System.Drawing.Image ResizeImage(System.Drawing.Image i, int MaxWidth, int MaxHeight)
         {
             //do some maths to determine the best way of resizing the image
             //e.g. if the max width and height are 100, a tall image will be 100 on the height, a wide one will be 100 on the width

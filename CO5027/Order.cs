@@ -12,24 +12,21 @@ namespace CO5027
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Order()
         {
-            this.Images = new HashSet<Image>();
             this.OrderedProducts = new HashSet<OrderedProduct>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int InitialHeight { get; set; }
-        public int InitialWidth { get; set; }
-        public bool Archived { get; set; }
+        public string TotalCost { get; set; }
+        public string AmountPaid { get; set; }
+        public System.DateTime DateStamp { get; set; }
+        public int CustomerId { get; set; }
+        public string PaymentReference { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
     }

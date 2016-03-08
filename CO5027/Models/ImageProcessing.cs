@@ -9,60 +9,72 @@ namespace CO5027.Models
 {
     public class ImageProcessing
     {
-        public static bool SaveWatermarkedImages(Image i, int photoId)
+        public bool SaveWatermarkedImages(System.Drawing.Image img, int photoId)
         {
             bool success = false;
 
             string filename = photoId.ToString();
 
-            int height = i.Height;
-            int width = i.Width;
-
-
-            // resize img's
-            int smallImgMaxWidth = 600;
-            int smallImgMaxHeight = 600;
-            int mediumImgMaxWidth = 1100;
-            int mediumImgMaxHeight = 1100;
-            int largeImgMaxWidth = 2000;
-            int largeImgMaxHeight = 2000;
-
-            System.Drawing.Image smallImg = i;
-            System.Drawing.Image mediumImg = i;
-            System.Drawing.Image largeImg = i;
-
-            // prevent enlarging
-            if (width > smallImgMaxHeight || height > smallImgMaxHeight)
-            {
-                smallImg = ImageManipulation.ResizeImage(i, smallImgMaxWidth, smallImgMaxHeight);
-            }
-
-            if (width > mediumImgMaxWidth || height > mediumImgMaxHeight)
-            {
-                mediumImg = ImageManipulation.ResizeImage(i, mediumImgMaxWidth, mediumImgMaxHeight);
-            }
-
-            if (width > largeImgMaxWidth || height > largeImgMaxHeight)
-            {
-                largeImg = ImageManipulation.ResizeImage(i, largeImgMaxWidth, largeImgMaxHeight);
-            }
-
-            // ~~~~ TODO: watermark images ~~~~
+            int height = img.Height;
+            int width = img.Width;
 
             string path = System.Web.Hosting.HostingEnvironment.MapPath("~/files/images/watermarked/");
 
-            // resized images
-            // large
-            largeImg.Save(path + filename + "-lg.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
-            //// large
-            mediumImg.Save(path + filename + "-md.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            var sizes = db.Sizes.Where(s => s.Archived == false).ToList();
 
-            //// small
-            smallImg.Save(path + filename + "-sm.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            foreach (var size in sizes)
+            {
+                int maxWidth = size.MaxWidth;
+                int maxHeight = size.MaxHeight;
 
+                var resizedImage = img;
+
+                // prevents enlarging
+                if (width > maxWidth || height > maxHeight)
+                {
+                    resizedImage = ImageManipulation.ResizeImage(img, maxWidth, maxHeight);
+                }
+                resizedImage = AddWatermark(resizedImage);
+
+                int newHeight = resizedImage.Height;
+                int newWidth = resizedImage.Width;
+
+                string filePath = path + filename + "-" + size.Id + ".jpg";
+                resizedImage.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                var fileSize = new System.IO.FileInfo(filePath).Length;
+
+                var imageInDb = size.Images.FirstOrDefault(i => i.ProductId == photoId);
+                if (imageInDb != null)
+                {
+                    imageInDb.Height = newHeight;
+                    imageInDb.Width = newWidth;
+                    imageInDb.SizeOfFile = (int)fileSize;
+                    db.SaveChangesAsync();
+                }
+                else
+                {
+                    imageInDb = new CO5027.Image();
+                    imageInDb.Height = newHeight;
+                    imageInDb.Width = newWidth;
+                    imageInDb.ProductId = photoId;
+                    imageInDb.SizeId = size.Id;
+                    imageInDb.SizeOfFile = (int)fileSize;
+                    db.Images.Add(imageInDb);
+                    db.SaveChangesAsync();
+                }
+
+            }
+            success = true;
 
             return success;
+        }
+
+        public static System.Drawing.Image AddWatermark(System.Drawing.Image i)
+        {
+            // TODO: add watermark
+            return i;
         }
     }
 }

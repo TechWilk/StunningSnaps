@@ -5,6 +5,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section class="page">
         <h2>Photo</h2>
+        <asp:Literal ID="litPhotoInfo" runat="server"></asp:Literal>
+        <asp:DropDownList ID="ddlSize" runat="server"></asp:DropDownList>
+        <asp:Button ID="btnAddToBasket" runat="server" Text="Add to Basket" OnClick="btnAddToBasket_Click" />
         <asp:Image ID="imgPhoto" runat="server" />
     </section>
 </asp:Content>

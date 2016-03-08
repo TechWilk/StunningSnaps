@@ -61,7 +61,9 @@ namespace CO5027.user
 
                     // save watermarked images to disk
 
-                    if (ImageProcessing.SaveWatermarkedImages(img, product.Id))
+                    ImageProcessing imageProcessor = new ImageProcessing();
+
+                    if (imageProcessor.SaveWatermarkedImages(img, product.Id))
                     {
                         success = true;
                         return success;
@@ -69,7 +71,7 @@ namespace CO5027.user
                     else
                     {
                         success = false;
-                        litFeedback.Text = "Unable to process image, please go to <a href='manage.aspx'>Admin Panel</a> and try again.";
+                        litFeedback.Text = "Unable to process image, please go to <a href='manage.aspx'>Admin Panel</a> and click 'Reprocess Images' to try again.";
                         return success;
 
                     }
@@ -87,7 +89,6 @@ namespace CO5027.user
                 litFeedback.Text = "Images of " + fileExtention + " are not accepted. Please upload a JPEG, PNG, GIF or TIFF.";
                 return success;
             }
-            return success;
         }
     }
 }

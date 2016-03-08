@@ -11,35 +11,52 @@ namespace CO5027.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+
             // TODO: ensure user is authorised to download image
 
+            int userId = 1;  //TODO: fetch from auth providor
 
+            OrderedProduct orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId);
+
+            string databaseToken = "xxxxx"; // TODO: fetch token from database
+
+            // check token
+            string token = Request.QueryString["token"];
+
+            if (token != databaseToken)
+            {
+                Response.Redirect("~/user/");
+            }
+
+
+            // fetch photo
             int id = 0;
+            int size = 0;
 
             bool idIsInt = int.TryParse(Request.QueryString["id"], out id);
+            bool sizeIdIsInt = int.TryParse(Request.QueryString["size"], out size);
 
-            if (!idIsInt || id == 0)
+            if ((!idIsInt || id == 0) && (!sizeIdIsInt || size == 0))
             {
                 Response.Redirect("~/user/");
             }
 
             // fetch from db
-            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
-            Product photo = new Product();
+            Image image = new Image();
 
             try
             {
-                photo = db.Products.Single(p => p.Id == id);
+                image = db.Images.Single(i => i.ProductId == id && i.SizeId == size);
             }
             catch
             {
                 Response.Redirect("~/user/");
             }
 
-
             string extention = ".jpg";  // TODO: fetch extention from db
-            //int imageSize = 123333;  // TODO: fetch image size from db
-            string downloadName = photo.Name + extention;
+            int imageSize = (int)image.SizeOfFile;
+            string downloadName = image.Product.Name + extention;
             string fileLocation = MapPath("~/files/images/original/" + id.ToString() + extention);
 
 
