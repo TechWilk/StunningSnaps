@@ -16,6 +16,7 @@
         <AssociationConnector Association="db_1417800_CO5027Model.FK_OrderedProducts_Products" />
         <AssociationConnector Association="db_1417800_CO5027Model.FK_OrderedProducts_Size" />
         <EntityTypeShape EntityType="db_1417800_CO5027Model.Basket" Width="1.5" PointX="0.875" PointY="4.375" />
+        <AssociationConnector Association="db_1417800_CO5027Model.FK_Basket_Products" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

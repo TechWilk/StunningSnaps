@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CO5027.user {
+namespace CO5027.admin {
     
     
     public partial class add {

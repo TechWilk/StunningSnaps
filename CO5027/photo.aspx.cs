@@ -50,10 +50,12 @@ namespace CO5027
 
             litPhotoInfo.Text = photoInfoFormatted;
 
-            imgPhoto.ImageUrl = "~/files/images/watermarked/" + id.ToString() + "-lg.jpg";
+            var image = photo.Images.FirstOrDefault(p => p.SizeId == 2);
+            
+            imgPhoto.ImageUrl = "~/files/images/watermarked/" + id.ToString() + "-2.jpg";
             imgPhoto.AlternateText = photo.Description;
-            imgPhoto.Width = 800;  // TODO: use sizes from db
-            imgPhoto.Height = 800;
+            imgPhoto.Width = image.Width;
+            // TODO: ask Andrew - this uses CSS, not HTML tags - imgPhoto.Height = image.Height;
         }
 
         protected void btnAddToBasket_Click(object sender, EventArgs e)
@@ -61,15 +63,13 @@ namespace CO5027
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
             int productId = int.Parse(Request.QueryString["id"]);
-            int sizeId = int.Parse(ddlSize.SelectedValue); // TODO: check this works
-            var image = db.Images.Single(i => i.ProductId == productId && i.SizeId == sizeId);
             int qty = 1; //TODO: add option to UI
 
             if (true) // TODO: check if user logged in
             {
                 var basketEntry = new Basket();
                 basketEntry.CustomerId = 1; // TODO: fetch from identity
-                basketEntry.ImageId = image.Id;
+                basketEntry.ProductId = productId;
                 basketEntry.Qty = qty;
                 db.Baskets.Add(basketEntry);
                 db.SaveChangesAsync();
@@ -78,7 +78,7 @@ namespace CO5027
             else
             {
                 // redir to login
-                Session.Add("basketImageId", image.Id);
+                Session.Add("basketProducteId", productId);
                 Session.Add("basketQty", qty);
                 // TODO: if not logged in, add to session & update db upon login
                 Response.Redirect("~/login.aspx");

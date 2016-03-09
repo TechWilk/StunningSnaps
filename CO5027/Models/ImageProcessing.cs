@@ -51,7 +51,7 @@ namespace CO5027.Models
                     imageInDb.Height = newHeight;
                     imageInDb.Width = newWidth;
                     imageInDb.SizeOfFile = (int)fileSize;
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace CO5027.Models
                     imageInDb.SizeId = size.Id;
                     imageInDb.SizeOfFile = (int)fileSize;
                     db.Images.Add(imageInDb);
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                 }
 
             }
@@ -71,10 +71,10 @@ namespace CO5027.Models
             return success;
         }
 
-        public static System.Drawing.Image AddWatermark(System.Drawing.Image i)
+        public static System.Drawing.Image AddWatermark(System.Drawing.Image img)
         {
             // TODO: add watermark
-            return i;
+            return img;
         }
     }
 }

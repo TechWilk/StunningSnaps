@@ -1,10 +1,13 @@
-﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="manage.aspx.cs" Inherits="CO5027.user.manage" %>
-
+﻿<%@ Page EnableEventValidation="false" Title="Manage images | StunningSnaps" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="CO5027.admin._default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headerContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section class="page">
         <h2>Manage Photos</h2>
+
+        <div>
+            <a href="~/admin/add.aspx" runat="server">Add image</a>
+        </div>
 
         <asp:Repeater ID="rptPhotos" runat="server" OnItemCommand="rptPhotos_ItemCommand">
             <HeaderTemplate>
@@ -18,10 +21,10 @@
             <ItemTemplate>
                 <tr>
                     <td>
-                        <img src="<%# Eval("Id","../files/images/watermarked/{0}-sm.jpg") %>" alt="<%# Eval("Description") %>" width="<%# Eval("InitialWidth") %>" height="<%# Eval("InitialHeight") %>" />
+                        <img src="<%# Eval("Id","../files/images/watermarked/{0}-3.jpg") %>" alt="<%# HttpUtility.HtmlEncode(Eval("Description")) %>" width="<%# Eval("InitialWidth") %>" height="<%# Eval("InitialHeight") %>" />
                     </td>
                     <td>
-                        <%# Eval("Name") %>
+                        <%# HttpUtility.HtmlEncode(Eval("Name")) %>
                     </td>
                     <td>
                         <asp:Button ID="btnArchive" runat="server" Text='<%# ((bool)Eval("Archived")) ? "Unarchive" : "Archive"  %>' CommandArgument='<%# Eval("Id") %>' />

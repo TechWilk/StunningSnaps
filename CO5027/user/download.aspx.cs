@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace CO5027.user
 
             // TODO: ensure user is authorised to download image
 
-            int userId = 1;  //TODO: fetch from auth providor
+            string userId = User.Identity.GetUserId();  //TODO: fetch from auth providor
 
             OrderedProduct orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId);
 
@@ -32,31 +33,28 @@ namespace CO5027.user
 
             // fetch photo
             int id = 0;
-            int size = 0;
-
             bool idIsInt = int.TryParse(Request.QueryString["id"], out id);
-            bool sizeIdIsInt = int.TryParse(Request.QueryString["size"], out size);
 
-            if ((!idIsInt || id == 0) && (!sizeIdIsInt || size == 0))
+            if ((!idIsInt || id == 0))
             {
                 Response.Redirect("~/user/");
             }
 
             // fetch from db
-            Image image = new Image();
+            Product photo = new Product();
 
             try
             {
-                image = db.Images.Single(i => i.ProductId == id && i.SizeId == size);
+                photo = db.Products.Single(p => p.Id == id);
             }
             catch
             {
                 Response.Redirect("~/user/");
             }
 
-            string extention = ".jpg";  // TODO: fetch extention from db
-            int imageSize = (int)image.SizeOfFile;
-            string downloadName = image.Product.Name + extention;
+            string extention = photo.Extension;
+            int imageSize = (int)photo.SizeOfFile;
+            string downloadName = photo.Name + extention;
             string fileLocation = MapPath("~/files/images/original/" + id.ToString() + extention);
 
 
@@ -69,7 +67,7 @@ namespace CO5027.user
 
                 Response.ContentType = "image/jpeg";
                 Response.AddHeader("Content-Disposition", "attachment; filename=" + downloadName + ";");
-                //Response.AddHeader("Content-Length", imageSize.ToString());
+                Response.AddHeader("Content-Length", imageSize.ToString());
                 Response.WriteFile(fileLocation);
 
                 Response.Flush();

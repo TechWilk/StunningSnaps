@@ -104,6 +104,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\add.aspx" />
+    <Content Include="admin\default.aspx" />
     <Content Include="checkout.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="default.aspx" />
@@ -169,6 +171,7 @@
     <Content Include="EntityDataModel.edmx.diagram">
       <DependentUpon>EntityDataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="files\images\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,14 +184,27 @@
     <Content Include="Styles\MainStyle.min.css">
       <DependentUpon>MainStyle.css</DependentUpon>
     </Content>
-    <Content Include="user\add.aspx" />
     <Content Include="user\default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="user\download.aspx" />
-    <Content Include="user\manage.aspx" />
+    <Content Include="user\orders.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\add.aspx.cs">
+      <DependentUpon>add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\add.aspx.designer.cs">
+      <DependentUpon>add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Basket.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
@@ -264,13 +280,6 @@
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="user\add.aspx.cs">
-      <DependentUpon>add.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="user\add.aspx.designer.cs">
-      <DependentUpon>add.aspx</DependentUpon>
-    </Compile>
     <Compile Include="user\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,12 +301,12 @@
     <Compile Include="user\download.aspx.designer.cs">
       <DependentUpon>download.aspx</DependentUpon>
     </Compile>
-    <Compile Include="user\manage.aspx.cs">
-      <DependentUpon>manage.aspx</DependentUpon>
+    <Compile Include="user\orders.aspx.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="user\manage.aspx.designer.cs">
-      <DependentUpon>manage.aspx</DependentUpon>
+    <Compile Include="user\orders.aspx.designer.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

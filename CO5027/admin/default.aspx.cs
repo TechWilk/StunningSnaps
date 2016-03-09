@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CO5027.user
+namespace CO5027.admin
 {
-    public partial class manage : System.Web.UI.Page
+    public partial class _default : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,7 +35,7 @@ namespace CO5027.user
             foreach (Product p in products)
             {
                 int id = p.Id;
-                string path = Server.MapPath("~/files/images/original/" + id.ToString() + ".jpg"); // TODO: fetch extention from database
+                string path = Server.MapPath("~/files/images/original/" + id.ToString() + p.Extension); // TODO: fetch extention from database
                 var img = System.Drawing.Image.FromFile(path);
                 imageProcessor.SaveWatermarkedImages(img, id);
             }
@@ -43,15 +43,13 @@ namespace CO5027.user
 
         protected void rptPhotos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            //Button b = (sender as Button);
-
             string idString = e.CommandArgument.ToString();
 
             int id = int.Parse(idString);
 
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
             var product = db.Products.Single(p => p.Id == id);
-            if(product.Archived)
+            if (product.Archived)
             {
                 product.Archived = false;
             }
@@ -60,7 +58,7 @@ namespace CO5027.user
                 product.Archived = true;
             }
 
-            db.SaveChanges();
+            db.SaveChangesAsync();
             BindRepeater();
         }
     }

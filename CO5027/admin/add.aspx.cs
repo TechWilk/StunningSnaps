@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CO5027.user
+namespace CO5027.admin
 {
     public partial class add : System.Web.UI.Page
     {
@@ -14,7 +14,6 @@ namespace CO5027.user
         {
 
         }
-
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             var name = txtName.Text;
@@ -49,6 +48,7 @@ namespace CO5027.user
                     product.Description = description;
                     product.InitialHeight = height;
                     product.InitialWidth = width;
+                    product.Extension = fileExtention;
 
                     db.Products.Add(product);
                     db.SaveChanges();

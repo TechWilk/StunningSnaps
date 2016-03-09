@@ -4,80 +4,92 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="db_1417800_CO5027Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="db_1417800_CO5027Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="Basket">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="ImageId" Type="int" />
-          <Property Name="Qty" Type="int" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="CustomerId" Nullable="false" Type="int" />
+          <Property Name="ProductId" Nullable="false" Type="int" />
+          <Property Name="Qty" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
             <PropertyRef Name="SizeId" />
             <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="SizeId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Width" Type="int" Nullable="false" />
-          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="SizeId" Nullable="false" Type="int" />
+          <Property Name="ProductId" Nullable="false" Type="int" />
+          <Property Name="Width" Nullable="false" Type="int" />
+          <Property Name="Height" Nullable="false" Type="int" />
           <Property Name="SizeOfFile" Type="int" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
         </EntityType>
         <EntityType Name="OrderedProducts">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="SizeId" Type="int" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="DownloadCount" Type="int" Nullable="false" />
-          <Property Name="DownloadsAllowed" Type="int" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="ProductId" Nullable="false" Type="int" />
+          <Property Name="SizeId" Nullable="false" Type="int" />
+          <Property Name="OrderId" Nullable="false" Type="int" />
+          <Property Name="DownloadCount" Nullable="false" Type="int" />
+          <Property Name="DownloadsAllowed" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="TotalCost" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="AmountPaid" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="DateStamp" Type="datetime" Nullable="false" />
-          <Property Name="PaymentReference" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="CustomerId" Nullable="false" Type="int" />
+          <Property Name="TotalCost" Nullable="false" MaxLength="10" Type="nchar" />
+          <Property Name="AmountPaid" Nullable="false" MaxLength="10" Type="nchar" />
+          <Property Name="DateStamp" Nullable="false" Type="datetime" />
+          <Property Name="PaymentReference" MaxLength="50" Type="nvarchar" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="60" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Name" MaxLength="60" Type="nvarchar" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="InitialHeight" Type="int" Nullable="false" />
-          <Property Name="InitialWidth" Type="int" Nullable="false" />
-          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="InitialHeight" Nullable="false" Type="int" />
+          <Property Name="InitialWidth" Nullable="false" Type="int" />
+          <Property Name="Archived" Nullable="false" Type="bit" />
+          <Property Name="Extension" Nullable="false" MaxLength="5" Type="nvarchar" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="MaxWidth" Type="int" Nullable="false" />
-          <Property Name="MaxHeight" Type="int" Nullable="false" />
-          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Name" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Price" Nullable="false" Precision="18" Scale="2" Type="decimal" />
+          <Property Name="MaxWidth" Nullable="false" Type="int" />
+          <Property Name="MaxHeight" Nullable="false" Type="int" />
+          <Property Name="Archived" Nullable="false" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_Basket_Images' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_Basket_Images" />-->
-        <Association Name="FK_Images_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1">
+        <Association Name="FK_Basket_Products">
+          <End Type="Self.Products" Multiplicity="1" Role="Products">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <End Type="Self.Basket" Multiplicity="*" Role="Basket" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Products">
+          <End Type="Self.Products" Multiplicity="1" Role="Products">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.Images" Multiplicity="*" Role="Images" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
@@ -88,10 +100,10 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Images_Size">
-          <End Role="Size" Type="Self.Size" Multiplicity="1">
+          <End Type="Self.Size" Multiplicity="1" Role="Size">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <End Type="Self.Images" Multiplicity="*" Role="Images" />
           <ReferentialConstraint>
             <Principal Role="Size">
               <PropertyRef Name="Id" />
@@ -102,10 +114,10 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderedProducts_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+          <End Type="Self.Orders" Multiplicity="1" Role="Orders">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="OrderedProducts" Type="Self.OrderedProducts" Multiplicity="*" />
+          <End Type="Self.OrderedProducts" Multiplicity="*" Role="OrderedProducts" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="Id" />
@@ -116,10 +128,10 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderedProducts_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1">
+          <End Type="Self.Products" Multiplicity="1" Role="Products">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="OrderedProducts" Type="Self.OrderedProducts" Multiplicity="*" />
+          <End Type="Self.OrderedProducts" Multiplicity="*" Role="OrderedProducts" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="Id" />
@@ -130,10 +142,10 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderedProducts_Size">
-          <End Role="Size" Type="Self.Size" Multiplicity="1">
+          <End Type="Self.Size" Multiplicity="1" Role="Size">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="OrderedProducts" Type="Self.OrderedProducts" Multiplicity="*" />
+          <End Type="Self.OrderedProducts" Multiplicity="*" Role="OrderedProducts" />
           <ReferentialConstraint>
             <Principal Role="Size">
               <PropertyRef Name="Id" />
@@ -150,25 +162,29 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Basket_Products" Association="Self.FK_Basket_Products">
+            <End EntitySet="Products" Role="Products" />
+            <End EntitySet="Basket" Role="Basket" />
+          </AssociationSet>
           <AssociationSet Name="FK_Images_Products" Association="Self.FK_Images_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Images" EntitySet="Images" />
+            <End EntitySet="Products" Role="Products" />
+            <End EntitySet="Images" Role="Images" />
           </AssociationSet>
           <AssociationSet Name="FK_Images_Size" Association="Self.FK_Images_Size">
-            <End Role="Size" EntitySet="Size" />
-            <End Role="Images" EntitySet="Images" />
+            <End EntitySet="Size" Role="Size" />
+            <End EntitySet="Images" Role="Images" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedProducts_Orders" Association="Self.FK_OrderedProducts_Orders">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderedProducts" EntitySet="OrderedProducts" />
+            <End EntitySet="Orders" Role="Orders" />
+            <End EntitySet="OrderedProducts" Role="OrderedProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedProducts_Products" Association="Self.FK_OrderedProducts_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="OrderedProducts" EntitySet="OrderedProducts" />
+            <End EntitySet="Products" Role="Products" />
+            <End EntitySet="OrderedProducts" Role="OrderedProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedProducts_Size" Association="Self.FK_OrderedProducts_Size">
-            <End Role="Size" EntitySet="Size" />
-            <End Role="OrderedProducts" EntitySet="OrderedProducts" />
+            <End EntitySet="Size" Role="Size" />
+            <End EntitySet="OrderedProducts" Role="OrderedProducts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -187,6 +203,8 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           <Property Name="Archived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Images" Relationship="db_1417800_CO5027Model.FK_Images_Products" FromRole="Product" ToRole="Image" />
           <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Products" FromRole="Product" ToRole="OrderedProduct" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Baskets" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Product" ToRole="Basket" />
         </EntityType>
         <EntityContainer Name="DatabaseCO5027Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -215,6 +233,10 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
             <End Role="OrderedProduct" EntitySet="OrderedProducts" />
           </AssociationSet>
           <EntitySet Name="Baskets" EntityType="db_1417800_CO5027Model.Basket" />
+          <AssociationSet Name="FK_Basket_Products" Association="db_1417800_CO5027Model.FK_Basket_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Basket" EntitySet="Baskets" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Order">
           <Key>
@@ -345,9 +367,24 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="ImageId" Type="Int32" />
-          <Property Name="Qty" Type="Int32" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Basket" ToRole="Product" />
         </EntityType>
+        <Association Name="FK_Basket_Products">
+          <End Type="db_1417800_CO5027Model.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="db_1417800_CO5027Model.Basket" Role="Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -357,6 +394,7 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="db_1417800_CO5027Model.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -417,8 +455,8 @@ warning 6035: The relationship 'FK_Basket_Images' has columns that are not part 
           <EntitySetMapping Name="Baskets">
             <EntityTypeMapping TypeName="db_1417800_CO5027Model.Basket">
               <MappingFragment StoreEntitySet="Basket">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

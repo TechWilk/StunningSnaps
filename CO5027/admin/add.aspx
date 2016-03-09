@@ -1,5 +1,4 @@
-﻿<%@ Page Title="Add image | StunningSnaps" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="add.aspx.cs" Inherits="CO5027.user.add" %>
-
+﻿<%@ Page Title="Add image | StunningSnaps" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="add.aspx.cs" Inherits="CO5027.admin.add" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headerContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
@@ -25,5 +24,4 @@
             <asp:Literal ID="litFeedback" runat="server"></asp:Literal>
         </div>
     </section>
-
 </asp:Content>

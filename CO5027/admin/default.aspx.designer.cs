@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CO5027.user {
+namespace CO5027.admin {
     
     
-    public partial class manage {
+    public partial class _default {
         
         /// <summary>
         /// rptPhotos control.
