@@ -21,10 +21,10 @@ namespace CO5027
         }
     
         public int Id { get; set; }
+        public string CustomerId { get; set; }
         public string TotalCost { get; set; }
         public string AmountPaid { get; set; }
         public System.DateTime DateStamp { get; set; }
-        public int CustomerId { get; set; }
         public string PaymentReference { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

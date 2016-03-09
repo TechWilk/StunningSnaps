@@ -29,6 +29,7 @@ namespace CO5027
         public int InitialWidth { get; set; }
         public bool Archived { get; set; }
         public string Extension { get; set; }
+        public Nullable<int> SizeOfFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }

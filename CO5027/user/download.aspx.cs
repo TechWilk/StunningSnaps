@@ -12,30 +12,30 @@ namespace CO5027.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
-
-            // TODO: ensure user is authorised to download image
-
-            string userId = User.Identity.GetUserId();  //TODO: fetch from auth providor
-
-            OrderedProduct orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId);
-
-            string databaseToken = "xxxxx"; // TODO: fetch token from database
-
-            // check token
-            string token = Request.QueryString["token"];
-
-            if (token != databaseToken)
-            {
-                Response.Redirect("~/user/");
-            }
-
-
-            // fetch photo
+            // fetch photo id
             int id = 0;
             bool idIsInt = int.TryParse(Request.QueryString["id"], out id);
 
             if ((!idIsInt || id == 0))
+            {
+                Response.Redirect("~/user/");
+            }
+
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            OrderedProduct orderedProduct = new OrderedProduct();
+
+            string userId = User.Identity.GetUserId();
+
+            try
+            {
+                orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId && op.Product.Id == id);
+            }
+            catch
+            {
+                Response.Redirect("~/user/");
+            }
+
+            if (!(orderedProduct.DownloadCount > orderedProduct.DownloadsAllowed))
             {
                 Response.Redirect("~/user/");
             }
@@ -57,8 +57,10 @@ namespace CO5027.user
             string downloadName = photo.Name + extention;
             string fileLocation = MapPath("~/files/images/original/" + id.ToString() + extention);
 
+            // count download
+            orderedProduct.DownloadCount += 1;
+            db.SaveChanges();
 
-            
             try
             {
                 // initiate download
@@ -76,8 +78,10 @@ namespace CO5027.user
             catch
             {
             }
-            
+
             // cleanup
+
+            // TODO: cleanup after download
 
         }
     }
