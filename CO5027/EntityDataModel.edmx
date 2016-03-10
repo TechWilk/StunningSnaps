@@ -45,7 +45,7 @@
           <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DateStamp" Type="datetime" Nullable="false" />
-          <Property Name="PaymentReference" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -205,12 +205,12 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderedProduct" EntitySet="OrderedProducts" />
           </AssociationSet>
+          <EntitySet Name="UserDetails" EntityType="db_1417800_CO5027Model.UserDetail" />
           <EntitySet Name="Orders" EntityType="db_1417800_CO5027Model.Order" />
           <AssociationSet Name="FK_OrderedProducts_Orders" Association="db_1417800_CO5027Model.FK_OrderedProducts_Orders">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderedProduct" EntitySet="OrderedProducts" />
           </AssociationSet>
-          <EntitySet Name="UserDetails" EntityType="db_1417800_CO5027Model.UserDetail" />
           </EntityContainer>
         <EntityType Name="Image">
           <Key>
@@ -332,6 +332,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Id" />
@@ -341,7 +350,7 @@
           <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PaymentReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
         </EntityType>
         <Association Name="FK_OrderedProducts_Orders">
@@ -358,15 +367,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="UserDetail">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -432,18 +432,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Order">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="PaymentReference" ColumnName="PaymentReference" />
-                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
-                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="db_1417800_CO5027Model.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
@@ -451,6 +439,18 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

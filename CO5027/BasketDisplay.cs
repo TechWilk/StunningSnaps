@@ -7,14 +7,14 @@ namespace CO5027
 {
     public class BasketDisplay
     {
-        public int Id;
-        public string CustomerId;
-        public int ProductId;
-        public int Qty;
-        public int ImageHeight;
-        public int ImageWidth;
-        public string ProductName;
-        public string ProductDescription;
-        public decimal Price;
+        public int Id { get; set; }
+        public string CustomerId { get; set; }
+        public int ProductId { get; set; }
+        public int Qty { get; set; }
+        public int ImageHeight { get; set; }
+        public int ImageWidth { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public decimal Price { get; set; }
     }
 }

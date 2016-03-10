@@ -134,17 +134,15 @@ namespace CO5027.user
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
 
             // add items to basket if necessary
-            if (Session["basketProductId"] != null && Session["basketQty"] != null) // TODO: ask Andrew
+            if (Session["basketProductId"] != null)
             {
                 DatabaseCO5027Entities db = new DatabaseCO5027Entities();
                 var basketEntry = new Basket();
                 basketEntry.CustomerId = User.Identity.GetUserId();
                 basketEntry.ProductId = (int)Session["basketProductId"];
-                basketEntry.Qty = (int)Session["basketQty"];
                 db.Baskets.Add(basketEntry);
                 db.SaveChangesAsync();
 
-                Session.Remove("basketQty");
                 Session.Remove("basketProductId");
             }
 

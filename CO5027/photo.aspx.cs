@@ -52,7 +52,7 @@ namespace CO5027
             litPhotoInfo.Text = photoInfoFormatted;
 
             var image = photo.Images.FirstOrDefault(p => p.SizeId == 2);
-            
+
             imgPhoto.Src = "~/files/images/watermarked/" + id.ToString() + "-2.jpg";
             imgPhoto.Alt = photo.Description;
             imgPhoto.Width = image.Width;
@@ -64,24 +64,27 @@ namespace CO5027
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
             int productId = int.Parse(Request.QueryString["id"]);
-            int qty = 1; //TODO: add option to UI
-
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                var basketEntry = new Basket();
-                basketEntry.CustomerId = User.Identity.GetUserId();
-                basketEntry.ProductId = productId;
-                basketEntry.Qty = qty;
-                db.Baskets.Add(basketEntry);
-                db.SaveChangesAsync();
-                Response.Redirect("~/checkout.aspx");
+                db.Baskets.Single(i => i.ProductId == productId);
             }
-            else
+            catch
             {
-                // redir to login
-                Session.Add("basketProductId", productId);
-                Session.Add("basketQty", qty);
-                Response.Redirect("~/login.aspx");
+                if (User.Identity.IsAuthenticated)
+                {
+                    var basketEntry = new Basket();
+                    basketEntry.CustomerId = User.Identity.GetUserId();
+                    basketEntry.ProductId = productId;
+                    db.Baskets.Add(basketEntry);
+                    db.SaveChangesAsync();
+                    Response.Redirect("~/checkout.aspx");
+                }
+                else
+                {
+                    // redir to login
+                    Session.Add("basketProductId", productId);
+                    Response.Redirect("~/login.aspx");
+                }
             }
         }
     }

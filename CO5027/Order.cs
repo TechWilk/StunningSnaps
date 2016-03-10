@@ -25,7 +25,7 @@ namespace CO5027
         public decimal TotalCost { get; set; }
         public decimal AmountPaid { get; set; }
         public System.DateTime DateStamp { get; set; }
-        public string PaymentReference { get; set; }
+        public string PaymentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }

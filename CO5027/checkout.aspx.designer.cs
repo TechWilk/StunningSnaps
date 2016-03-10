@@ -49,6 +49,15 @@ namespace CO5027 {
         protected global::System.Web.UI.WebControls.Panel pnlCheckout;
         
         /// <summary>
+        /// litConfirmMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litConfirmMessage;
+        
+        /// <summary>
         /// btnConfirmOrder control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,23 @@ namespace CO5027 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmOrder;
+        
+        /// <summary>
+        /// pnlCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCancel;
+        
+        /// <summary>
+        /// litCancelMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litCancelMessage;
     }
 }

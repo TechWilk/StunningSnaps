@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using CO5027.Models;
+using PayPal.Api;
 
 namespace CO5027
 {
@@ -20,6 +21,15 @@ namespace CO5027
                     pnlCheckout.Visible = true;
 
                     SetupCheckout();
+                    break;
+
+                case "cancel":
+                    pnlBasket.Visible = false;
+                    pnlCancel.Visible = true;
+                    DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                    Order order = db.Orders.Single(o => o.Id == 1); //todo fetch order id from PayPal redirect
+                    db.Orders.Remove(order);
+                    litCancelMessage.Text = "<p>Invalid payment. You have not been charged. Please reorder the required products.</p>";
                     break;
 
                 default:
@@ -79,7 +89,7 @@ namespace CO5027
 
             order.DateStamp = DateTime.Now;
             order.CustomerId = customerId;
-            order.TotalCost = 0; // TODO: calculate total cost
+            order.TotalCost = 0; // calculated in foreach loop
 
             db.Orders.Add(order);
             db.SaveChanges();
@@ -88,6 +98,8 @@ namespace CO5027
 
             decimal totalCost = 0;
 
+            var products = new List<OrderedProduct>();
+
             foreach (var item in basket)
             {
                 OrderedProduct orderedProduct = new OrderedProduct();
@@ -95,21 +107,143 @@ namespace CO5027
                 orderedProduct.ProductId = item.ProductId;
                 orderedProduct.DownloadsAllowed = 0; // set once payment complete
                 db.OrderedProducts.Add(orderedProduct);
-                db.Baskets.Remove(item);
+                products.Add(orderedProduct);
                 totalCost += (decimal)item.Product.Price;
+                db.Baskets.Remove(item);
             }
 
             order.TotalCost = totalCost;
             db.SaveChanges();
 
-            // TODO: add PayPal stuff
+            PayPalPayment(db, order, products);
+        }
+        protected void PayPalPayment(DatabaseCO5027Entities db, Order order, List<OrderedProduct> products)
+        {
+            var config = ConfigManager.Instance.GetProperties();
+            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+            var apiContext = new APIContext(accessToken);
+
+            List<Item> items = new List<Item>();
+
+            foreach(OrderedProduct product in products)
+            {
+                Item item = new Item
+                {
+                    name = product.Product.Name,
+                    currency = "GBP",
+                    price = ((decimal)product.Product.Price).ToString("0.00"),
+                    quantity = "1",
+                    sku = product.ProductId.ToString()
+                };
+                items.Add(item);
+            };
+            ItemList productsItemList = new ItemList
+            {
+                items = items
+            };
+
+            var payment = Payment.Create(apiContext, new Payment
+            {
+                intent = "sale",
+                payer = new Payer
+                {
+                    payment_method = "paypal"
+                },
+                transactions = new List<Transaction>
+                {
+                    new Transaction
+                    {
+                        description = "Order from StunningSnaps",
+                        invoice_number = order.Id.ToString(),
+                        amount = new Amount
+                        {
+                            currency = "GBP",
+                            total = order.TotalCost.ToString("0.00"),
+                            details = new Details
+                            {
+                                tax = "0",
+                                shipping = "0",
+                                subtotal = order.TotalCost.ToString("0.00")
+                            }
+                        },
+                        item_list = productsItemList
+                    }
+                },
+                redirect_urls = new RedirectUrls
+                {
+                    return_url = "http://localhost:64918/chechout.aspx?action=confirm",
+                    cancel_url = "http://localhost:64918/chechout.aspx?action=cancel"
+                }
+            });
+
+            order.PaymentId = payment.id;
+            db.SaveChanges();
+
+            foreach (var link in payment.links)
+            {
+                if (link.rel.ToLower().Trim().Equals("approval_url"))
+                {
+                    Response.Redirect(link.href);
+                }
+            }
+        }
+        protected bool PayPalConfirmation()
+        {
+            var config = ConfigManager.Instance.GetProperties();
+            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+            var apiContext = new APIContext(accessToken);
+
+            string paymentId = Request.QueryString["paymentId"];
+            string payerId = Request.QueryString["payerId"];
+            if (String.IsNullOrEmpty(paymentId) || String.IsNullOrEmpty(payerId))
+            {
+                return false;
+            }
+
+            var payment = new Payment() { id = paymentId };
+            var paymentExecution = new PaymentExecution() { payer_id = payerId };
+
+            payment.Execute(apiContext, paymentExecution);
+            return true;
         }
         protected void btnConfirmOrder_Click(object sender, EventArgs e)
         {
-            // fetch data from form
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
-            string customerName = "bob"; //TODO: fetch fro db
-            string customerEmailAddress = "customer email address";
+            if (!PayPalConfirmation())
+            {
+                litConfirmMessage.Text = "<p>Payment aborted. You have not been charged. Please reorder the required products.</p>";
+                btnConfirmOrder.Visible = false;
+                Order order = db.Orders.Single(o => o.Id == 1); //todo fetch order id from PayPal redirect
+                db.Orders.Remove(order);
+                return;
+            }
+
+            int orderId = 1; // todo: fetch order id from PayPal
+
+            var products = db.OrderedProducts.Where(op => op.OrderId == orderId);
+
+            foreach (var product in products)
+            {
+                product.DownloadsAllowed += 5;
+            }
+            db.SaveChanges();
+
+            string customerId = User.Identity.GetUserId();
+            var customer = db.UserDetails.Single(c => c.UserId == customerId);
+
+            string customerName = customer.FirstName + " " + customer.Surname;
+            string customerEmailAddress = customer.Email;
+
+            SendEmailToAdmin(customer);
+            SendEmailToCustomer(customer);
+
+            Response.Redirect("~/");
+        }
+        protected void SendEmailToAdmin(UserDetail customer)
+        {
+            string customerName = customer.FirstName + " " + customer.Surname;
+            string customerEmailAddress = customer.Email;
 
             // format email for admin
 
@@ -118,7 +252,28 @@ namespace CO5027
             emailToAdmin += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
             emailToAdmin += Environment.NewLine;
             emailToAdmin += "MESSAGE:" + Environment.NewLine;
-            emailToAdmin += "Thank you for your order" + Environment.NewLine; // add proper message
+            emailToAdmin += "Thank you for your order" + Environment.NewLine; // todo: add proper message
+            emailToAdmin += Environment.NewLine;
+            emailToAdmin += "Message sent though StunningSnaps website";
+
+            string subjectToAdmin = "New message from: " + customerName;
+
+            // Send email to admin
+            Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin);
+        }
+        protected void SendEmailToCustomer(UserDetail customer)
+        {
+            string customerName = customer.FirstName + " " + customer.Surname;
+            string customerEmailAddress = customer.Email;
+
+            // format email for admin
+
+            string emailToAdmin = "Email Sumbitted:" + Environment.NewLine;
+            emailToAdmin += "FROM: " + customerName + Environment.NewLine;
+            emailToAdmin += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
+            emailToAdmin += Environment.NewLine;
+            emailToAdmin += "MESSAGE:" + Environment.NewLine;
+            emailToAdmin += "Thank you for your order" + Environment.NewLine; // todo: add proper message
             emailToAdmin += Environment.NewLine;
             emailToAdmin += "Message sent though StunningSnaps website";
 
