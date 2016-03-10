@@ -35,6 +35,21 @@
                     <asp:RequiredFieldValidator ID="RegisterUsernameRequiredFieldValidator" runat="server" ErrorMessage="Username is required" ValidationGroup="Register" ControlToValidate="txtRegisterUsername"></asp:RequiredFieldValidator>
                 </div>
                 <div>
+                    <asp:Label runat="server" AssociatedControlID="txtRegisterFirstName">First Name</asp:Label>
+                    <asp:TextBox runat="server" ID="txtRegisterFirstName" />
+                    <asp:RequiredFieldValidator ID="RegisterFirstNameRequiredFieldValidator" runat="server" ErrorMessage="Name is required" ValidationGroup="Register" ControlToValidate="txtRegisterFirstName"></asp:RequiredFieldValidator>
+                </div>
+                <div>
+                    <asp:Label runat="server" AssociatedControlID="txtRegisterSurname">Surame</asp:Label>
+                    <asp:TextBox runat="server" ID="txtRegisterSurname" />
+                    <asp:RequiredFieldValidator ID="RegisterSurnameRequiredFieldValidator" runat="server" ErrorMessage="Name is required" ValidationGroup="Register" ControlToValidate="txtRegisterSurname"></asp:RequiredFieldValidator>
+                </div>
+                <div>
+                    <asp:Label runat="server" AssociatedControlID="txtRegisterEmail">Email Address</asp:Label>
+                    <asp:TextBox runat="server" ID="txtRegisterEmail" />
+                    <asp:RequiredFieldValidator ID="RegisterEmailRequiredFieldValidator" runat="server" ErrorMessage="Email address is required" ValidationGroup="Register" ControlToValidate="txtRegisterEmail"></asp:RequiredFieldValidator>
+                </div>
+                <div>
                     <asp:Label runat="server" AssociatedControlID="txtRegisterPassword">Password</asp:Label>
                     <asp:TextBox runat="server" ID="txtRegisterPassword" TextMode="Password" />
                     <asp:RequiredFieldValidator ID="RegisterPasswordRequiredFieldValidator" runat="server" ErrorMessage="Password is required" ValidationGroup="Register" ControlToValidate="txtRegisterPassword"></asp:RequiredFieldValidator>

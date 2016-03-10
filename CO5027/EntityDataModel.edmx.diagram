@@ -16,6 +16,7 @@
         <AssociationConnector Association="db_1417800_CO5027Model.FK_OrderedProducts_Products" />
         <EntityTypeShape EntityType="db_1417800_CO5027Model.Order" Width="1.5" PointX="0.75" PointY="6" />
         <AssociationConnector Association="db_1417800_CO5027Model.FK_OrderedProducts_Orders" />
+        <EntityTypeShape EntityType="db_1417800_CO5027Model.UserDetail" Width="1.5" PointX="3.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

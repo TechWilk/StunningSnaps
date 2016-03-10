@@ -112,6 +112,60 @@ namespace CO5027.user {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RegisterUsernameRequiredFieldValidator;
         
         /// <summary>
+        /// txtRegisterFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegisterFirstName;
+        
+        /// <summary>
+        /// RegisterFirstNameRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RegisterFirstNameRequiredFieldValidator;
+        
+        /// <summary>
+        /// txtRegisterSurname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegisterSurname;
+        
+        /// <summary>
+        /// RegisterSurnameRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RegisterSurnameRequiredFieldValidator;
+        
+        /// <summary>
+        /// txtRegisterEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegisterEmail;
+        
+        /// <summary>
+        /// RegisterEmailRequiredFieldValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RegisterEmailRequiredFieldValidator;
+        
+        /// <summary>
         /// txtRegisterPassword control.
         /// </summary>
         /// <remarks>

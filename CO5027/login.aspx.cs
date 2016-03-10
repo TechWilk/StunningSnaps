@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using CO5027.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System;
@@ -65,12 +66,63 @@ namespace CO5027.user
             IdentityResult result = manager.Create(user, txtRegisterPassword.Text);
             if (result.Succeeded)
             {
+                DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                var userDetails = new UserDetail();
+                userDetails.UserId = user.Id;
+                userDetails.FirstName = txtRegisterFirstName.Text;
+                userDetails.Surname = txtRegisterSurname.Text;
+                userDetails.Email = txtRegisterEmail.Text;
+                db.UserDetails.Add(userDetails);
+                db.SaveChanges();
+                db.Dispose();
+
+                SendWelcomeEmailToCustomer(user);
+                SendWelcomeEmailToAdmin(user);
                 Login(user, manager);
             }
             else
             {
                 litError.Text = result.Errors.FirstOrDefault();
             }
+        }
+        protected void SendWelcomeEmailToCustomer(IdentityUser user)
+        {
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            var userDetails = db.UserDetails.Single(u => u.UserId == user.Id);
+            var email = userDetails.Email;
+            var firstName = userDetails.FirstName;
+            var lastName = userDetails.Surname;
+
+            string emailBody = "";
+            emailBody += "Hello " + firstName + "," + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Thank you for signing up for an acount with StunningSnaps!" + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Your username is:" + user.UserName + Environment.NewLine;
+            emailBody += "Your password was set during account creation. If you need to reset your password, please follow the reset password instructions on the Login page." + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Message sent though StunningSnaps website";
+
+            // todo: complete email message
+
+            Email.sendEmail(email, "stunningsnaps@wilk.tech", "Welcome to StunningSnaps!", emailBody);
+
+        }
+        protected void SendWelcomeEmailToAdmin(IdentityUser user)
+        {
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            var userDetails = db.UserDetails.Single(u => u.UserId == user.Id);
+            var email = userDetails.Email;
+            var firstName = userDetails.FirstName;
+            var lastName = userDetails.Surname;
+
+            string emailBody = "";
+            emailBody += "Hello " + firstName + "," + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Thank you for signing up for an acount with StunningSnaps!" + Environment.NewLine;
+            // todo: complete email message
+
+            Email.sendEmail("stunningsnaps@wilk.tech", "stunningsnaps@wilk.tech", "New Account Created: " + user.UserName, emailBody);
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
