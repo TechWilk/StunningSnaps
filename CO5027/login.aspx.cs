@@ -29,7 +29,7 @@ namespace CO5027.user
                     break;
             }
 
-            if(System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 pnlLogin.Visible = false;
                 pnlEdit.Visible = true;
@@ -82,6 +82,21 @@ namespace CO5027.user
             var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+
+            // add items to basket if necessary
+            if (Session["basketProductId"] != null && Session["basketQty"] != null) // TODO: ask Andrew
+            {
+                DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                var basketEntry = new Basket();
+                basketEntry.CustomerId = User.Identity.GetUserId();
+                basketEntry.ProductId = (int)Session["basketProductId"];
+                basketEntry.Qty = (int)Session["basketQty"];
+                db.Baskets.Add(basketEntry);
+                db.SaveChangesAsync();
+
+                Session.Remove("basketQty");
+                Session.Remove("basketProductId");
+            }
 
             if (Request.QueryString["ReturnUrl"] == null)
             {

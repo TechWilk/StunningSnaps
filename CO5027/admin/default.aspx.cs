@@ -35,7 +35,7 @@ namespace CO5027.admin
             foreach (Product p in products)
             {
                 int id = p.Id;
-                string path = Server.MapPath("~/files/images/original/" + id.ToString() + p.Extension); // TODO: fetch extention from database
+                string path = Server.MapPath("~/files/images/original/" + id.ToString() + p.Extension);
                 var img = System.Drawing.Image.FromFile(path);
                 imageProcessor.SaveWatermarkedImages(img, id);
             }

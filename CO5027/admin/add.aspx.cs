@@ -39,7 +39,6 @@ namespace CO5027.admin
                     int height = img.Height;
                     int width = img.Width;
 
-                    // TODO: save record to db
                     DatabaseCO5027Entities db = new DatabaseCO5027Entities();
                     Product product = new Product();
 
@@ -56,8 +55,10 @@ namespace CO5027.admin
                     string filename = product.Id.ToString();
 
                     // save original image to disk
-
-                    img.Save(Server.MapPath("~/files/images/original/" + filename + fileExtention));
+                    string filePath = Server.MapPath("~/files/images/original/" + filename + fileExtention);
+                    img.Save(filePath);
+                    product.SizeOfFile = (int) new System.IO.FileInfo(filePath).Length;
+                    db.SaveChanges();
 
                     // save watermarked images to disk
 

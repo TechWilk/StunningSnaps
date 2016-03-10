@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 namespace CO5027
 {
@@ -11,7 +12,7 @@ namespace CO5027
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int customerId = 1; //TODO: fetch from auth system;
+            string customerId = User.Identity.GetUserId();
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
             var basket = db.Baskets.Where(b => b.CustomerId == customerId).ToList();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -65,22 +66,21 @@ namespace CO5027
             int productId = int.Parse(Request.QueryString["id"]);
             int qty = 1; //TODO: add option to UI
 
-            if (true) // TODO: check if user logged in
+            if (User.Identity.IsAuthenticated)
             {
                 var basketEntry = new Basket();
-                basketEntry.CustomerId = 1; // TODO: fetch from identity
+                basketEntry.CustomerId = User.Identity.GetUserId();
                 basketEntry.ProductId = productId;
                 basketEntry.Qty = qty;
                 db.Baskets.Add(basketEntry);
                 db.SaveChangesAsync();
-                //Response.Redirect("~/Basket.aspx");
+                Response.Redirect("~/basket.aspx");
             }
             else
             {
                 // redir to login
-                Session.Add("basketProducteId", productId);
+                Session.Add("basketProductId", productId);
                 Session.Add("basketQty", qty);
-                // TODO: if not logged in, add to session & update db upon login
                 Response.Redirect("~/login.aspx");
             }
         }
