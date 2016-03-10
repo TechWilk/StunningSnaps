@@ -53,10 +53,10 @@ namespace CO5027
 
             var image = photo.Images.FirstOrDefault(p => p.SizeId == 2);
             
-            imgPhoto.ImageUrl = "~/files/images/watermarked/" + id.ToString() + "-2.jpg";
-            imgPhoto.AlternateText = photo.Description;
+            imgPhoto.Src = "~/files/images/watermarked/" + id.ToString() + "-2.jpg";
+            imgPhoto.Alt = photo.Description;
             imgPhoto.Width = image.Width;
-            // TODO: ask Andrew - this uses CSS, not HTML tags - imgPhoto.Height = image.Height;
+            imgPhoto.Height = image.Height;
         }
 
         protected void btnAddToBasket_Click(object sender, EventArgs e)

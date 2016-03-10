@@ -216,6 +216,7 @@
     <Compile Include="Basket.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BasketDisplay.cs" />
     <Compile Include="checkout.aspx.cs">
       <DependentUpon>checkout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +259,7 @@
     <Compile Include="Image.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\ImageManipulation.cs" />
     <Compile Include="Models\ImageProcessing.cs" />
     <Compile Include="Order.cs">

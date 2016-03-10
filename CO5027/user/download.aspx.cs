@@ -28,29 +28,20 @@ namespace CO5027.user
 
             try
             {
-                orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId && op.Product.Id == id);
+                orderedProduct = db.OrderedProducts.Single(op => op.Order.CustomerId == userId && op.ProductId == id);
             }
             catch
             {
                 Response.Redirect("~/user/");
             }
 
-            if (!(orderedProduct.DownloadCount > orderedProduct.DownloadsAllowed))
+            if (!(orderedProduct.DownloadCount < orderedProduct.DownloadsAllowed))
             {
                 Response.Redirect("~/user/");
             }
 
             // fetch from db
-            Product photo = new Product();
-
-            try
-            {
-                photo = db.Products.Single(p => p.Id == id);
-            }
-            catch
-            {
-                Response.Redirect("~/user/");
-            }
+            Product photo = orderedProduct.Product;
 
             string extention = photo.Extension;
             int imageSize = (int)photo.SizeOfFile;

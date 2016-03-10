@@ -19,10 +19,8 @@ namespace CO5027
         public int OrderId { get; set; }
         public int DownloadCount { get; set; }
         public int DownloadsAllowed { get; set; }
-        public int SizeId { get; set; }
     
         public virtual Product Product { get; set; }
-        public virtual Size Size { get; set; }
         public virtual Order Order { get; set; }
     }
 }

@@ -18,19 +18,15 @@ namespace CO5027
         public Size()
         {
             this.Images = new HashSet<Image>();
-            this.OrderedProducts = new HashSet<OrderedProduct>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
         public int MaxWidth { get; set; }
         public int MaxHeight { get; set; }
         public bool Archived { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
     }
 }

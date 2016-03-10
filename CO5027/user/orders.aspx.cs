@@ -11,8 +11,7 @@ namespace CO5027.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //TODO: make this work
-            // TODO: remember to send emails to both client and company
+            // TODO: make this work: show existing orders for both client and company
         }
     }
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CO5027.Models;
 
 namespace CO5027
 {
@@ -39,7 +39,7 @@ namespace CO5027
             string subjectToAdmin = "New message from: " + customerName;
 
             // Send email to admin
-            if (!sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin))
+            if (!Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin))
             {
                 litResponseMessage.Text = "Error sending message.  Please wait for a miniute before trying again.";
             }
@@ -58,7 +58,7 @@ namespace CO5027
             emailToCustomer += "http://1417800.studentwebserver.co.uk/CO5027";
 
             // Send email to customer
-            if (!sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", "Message sent to StunningSnaps", emailToCustomer))
+            if (!Email.sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", "Message sent to StunningSnaps", emailToCustomer))
             {
                 litResponseMessage.Text = "Message sent to StunningSnaps.  Unable to copy message for your records, please make a note of your message.";
             }
@@ -67,41 +67,6 @@ namespace CO5027
             pnlContactForm.Visible = false;
             litResponseMessage.Text = "Message successfully sent.  You should recieve a copy in your inbox for your records.";
 
-        }
-
-        private bool sendEmail(string recipient, string replyTo, string emailSubject, string emailBody)
-        {
-            SmtpClient client = new SmtpClient();
-
-            client.EnableSsl = true;
-            client.Host = "petyrbaelish.asoshared.com";
-            client.Port = 587;
-
-            // Webmail can be accessed using the credentials below at https://wilk.tech/mail
-            NetworkCredential credentials = new NetworkCredential("stunningsnaps@wilk.tech", "h$GCA@Vp1(v#");
-            client.Credentials = credentials;
-
-            MailMessage msg = new MailMessage("stunningsnaps@wilk.tech", recipient);
-
-            MailAddressCollection replyToAddresses = new MailAddressCollection();
-            MailAddress replyToMailAddress = new MailAddress(replyTo);
-
-            msg.ReplyToList.Add(replyToMailAddress);
-
-            msg.Body = emailBody;
-            msg.Subject = emailSubject;
-
-            try 
-            {
-                client.Send(msg);
-            }
-            catch
-            {
-                return false;
-            }
-            
-
-            return true;
         }
     }
 }

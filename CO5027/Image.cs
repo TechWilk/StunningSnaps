@@ -21,7 +21,7 @@ namespace CO5027
         public int SizeOfFile { get; set; }
         public int Id { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Size Size { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

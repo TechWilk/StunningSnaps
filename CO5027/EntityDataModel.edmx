@@ -32,7 +32,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="SizeId" Type="int" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="DownloadCount" Type="int" Nullable="false" />
           <Property Name="DownloadsAllowed" Type="int" Nullable="false" />
@@ -43,8 +42,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="TotalCost" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="AmountPaid" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DateStamp" Type="datetime" Nullable="false" />
           <Property Name="PaymentReference" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -59,6 +58,7 @@
           <Property Name="InitialWidth" Type="int" Nullable="false" />
           <Property Name="Archived" Type="bit" Nullable="false" />
           <Property Name="SizeOfFile" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Extension" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="Size">
@@ -67,7 +67,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MaxWidth" Type="int" Nullable="false" />
           <Property Name="MaxHeight" Type="int" Nullable="false" />
           <Property Name="Archived" Type="bit" Nullable="false" />
@@ -142,20 +141,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderedProducts_Size">
-          <End Role="Size" Type="Self.Size" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="OrderedProducts" Type="Self.OrderedProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Size">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderedProducts">
-              <PropertyRef Name="SizeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="db_1417800_CO5027ModelStoreContainer">
           <EntitySet Name="Basket" EntityType="Self.Basket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
@@ -183,50 +168,31 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderedProducts" EntitySet="OrderedProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderedProducts_Size" Association="Self.FK_OrderedProducts_Size">
-            <End Role="Size" EntitySet="Size" />
-            <End Role="OrderedProducts" EntitySet="OrderedProducts" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_1417800_CO5027Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InitialHeight" Type="Int32" Nullable="false" />
-          <Property Name="InitialWidth" Type="Int32" Nullable="false" />
-          <Property Name="Archived" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Images" Relationship="db_1417800_CO5027Model.FK_Images_Products" FromRole="Product" ToRole="Image" />
-          <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Products" FromRole="Product" ToRole="OrderedProduct" />
-          <Property Name="Extension" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="SizeOfFile" Type="Int32" />
-          <NavigationProperty Name="Baskets" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Product" ToRole="Basket" />
-        </EntityType>
         <EntityContainer Name="DatabaseCO5027Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="OrderedProducts" EntityType="db_1417800_CO5027Model.OrderedProduct" />
           <EntitySet Name="Images" EntityType="db_1417800_CO5027Model.Image" />
           <EntitySet Name="Sizes" EntityType="db_1417800_CO5027Model.Size" />
-          <AssociationSet Name="FK_Images_Products" Association="db_1417800_CO5027Model.FK_Images_Products">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Image" EntitySet="Images" />
-          </AssociationSet>
           <AssociationSet Name="FK_Images_Size" Association="db_1417800_CO5027Model.FK_Images_Size">
             <End Role="Size" EntitySet="Sizes" />
             <End Role="Image" EntitySet="Images" />
           </AssociationSet>
+          <EntitySet Name="Baskets" EntityType="db_1417800_CO5027Model.Basket" />
+          <EntitySet Name="OrderedProducts" EntityType="db_1417800_CO5027Model.OrderedProduct" />
+          <EntitySet Name="Products" EntityType="db_1417800_CO5027Model.Product" />
+          <AssociationSet Name="FK_Basket_Products" Association="db_1417800_CO5027Model.FK_Basket_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Basket" EntitySet="Baskets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Products" Association="db_1417800_CO5027Model.FK_Images_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderedProducts_Products" Association="db_1417800_CO5027Model.FK_OrderedProducts_Products">
             <End Role="Product" EntitySet="Products" />
-            <End Role="OrderedProduct" EntitySet="OrderedProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderedProducts_Size" Association="db_1417800_CO5027Model.FK_OrderedProducts_Size">
-            <End Role="Size" EntitySet="Sizes" />
             <End Role="OrderedProduct" EntitySet="OrderedProducts" />
           </AssociationSet>
           <EntitySet Name="Orders" EntityType="db_1417800_CO5027Model.Order" />
@@ -234,26 +200,7 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderedProduct" EntitySet="OrderedProducts" />
           </AssociationSet>
-          <EntitySet Name="Baskets" EntityType="db_1417800_CO5027Model.Basket" />
-          <AssociationSet Name="FK_Basket_Products" Association="db_1417800_CO5027Model.FK_Basket_Products">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Basket" EntitySet="Baskets" />
-          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="OrderedProduct">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="DownloadCount" Type="Int32" Nullable="false" />
-          <Property Name="DownloadsAllowed" Type="Int32" Nullable="false" />
-          <Property Name="SizeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Products" FromRole="OrderedProduct" ToRole="Product" />
-          <NavigationProperty Name="Size" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Size" FromRole="OrderedProduct" ToRole="Size" />
-          <NavigationProperty Name="Order" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Orders" FromRole="OrderedProduct" ToRole="Order" />
-        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="SizeId" />
@@ -263,10 +210,10 @@
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="Width" Type="Int32" Nullable="false" />
           <Property Name="Height" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_Images_Products" FromRole="Image" ToRole="Product" />
           <NavigationProperty Name="Size" Relationship="db_1417800_CO5027Model.FK_Images_Size" FromRole="Image" ToRole="Size" />
           <Property Name="SizeOfFile" Type="Int32" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_Images_Products" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -274,27 +221,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="MaxWidth" Type="Int32" Nullable="false" />
           <Property Name="MaxHeight" Type="Int32" Nullable="false" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Images" Relationship="db_1417800_CO5027Model.FK_Images_Size" FromRole="Size" ToRole="Image" />
-          <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Size" FromRole="Size" ToRole="OrderedProduct" />
         </EntityType>
-        <Association Name="FK_Images_Products">
-          <End Type="db_1417800_CO5027Model.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="db_1417800_CO5027Model.Image" Role="Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Image">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Images_Size">
           <End Type="db_1417800_CO5027Model.Size" Role="Size" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -306,6 +237,73 @@
             </Principal>
             <Dependent Role="Image">
               <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Basket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Basket" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="DownloadCount" Type="Int32" Nullable="false" />
+          <Property Name="DownloadsAllowed" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Products" FromRole="OrderedProduct" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Orders" FromRole="OrderedProduct" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InitialHeight" Type="Int32" Nullable="false" />
+          <Property Name="InitialWidth" Type="Int32" Nullable="false" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="SizeOfFile" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Baskets" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Product" ToRole="Basket" />
+          <NavigationProperty Name="Images" Relationship="db_1417800_CO5027Model.FK_Images_Products" FromRole="Product" ToRole="Image" />
+          <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Products" FromRole="Product" ToRole="OrderedProduct" />
+        </EntityType>
+        <Association Name="FK_Basket_Products">
+          <End Type="db_1417800_CO5027Model.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="db_1417800_CO5027Model.Basket" Role="Basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Basket">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Products">
+          <End Type="db_1417800_CO5027Model.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="db_1417800_CO5027Model.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,28 +321,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderedProducts_Size">
-          <End Type="db_1417800_CO5027Model.Size" Role="Size" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="db_1417800_CO5027Model.OrderedProduct" Role="OrderedProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Size">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderedProduct">
-              <PropertyRef Name="SizeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="TotalCost" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AmountPaid" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaymentReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
@@ -363,62 +347,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Basket">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="db_1417800_CO5027Model.FK_Basket_Products" FromRole="Basket" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Basket_Products">
-          <End Type="db_1417800_CO5027Model.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="db_1417800_CO5027Model.Basket" Role="Basket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Basket">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="db_1417800_CO5027ModelStoreContainer" CdmEntityContainer="DatabaseCO5027Entities">
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="SizeOfFile" ColumnName="SizeOfFile" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="InitialHeight" ColumnName="InitialHeight" />
-                <ScalarProperty Name="InitialWidth" ColumnName="InitialWidth" />
-                <ScalarProperty Name="Archived" ColumnName="Archived" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderedProducts">
-            <EntityTypeMapping TypeName="db_1417800_CO5027Model.OrderedProduct">
-              <MappingFragment StoreEntitySet="OrderedProducts">
-                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
-                <ScalarProperty Name="DownloadsAllowed" ColumnName="DownloadsAllowed" />
-                <ScalarProperty Name="DownloadCount" ColumnName="DownloadCount" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="db_1417800_CO5027Model.Image">
               <MappingFragment StoreEntitySet="Images">
@@ -437,7 +371,42 @@
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="MaxHeight" ColumnName="MaxHeight" />
                 <ScalarProperty Name="MaxWidth" ColumnName="MaxWidth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Baskets">
+            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Basket">
+              <MappingFragment StoreEntitySet="Basket">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderedProducts">
+            <EntityTypeMapping TypeName="db_1417800_CO5027Model.OrderedProduct">
+              <MappingFragment StoreEntitySet="OrderedProducts">
+                <ScalarProperty Name="DownloadsAllowed" ColumnName="DownloadsAllowed" />
+                <ScalarProperty Name="DownloadCount" ColumnName="DownloadCount" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SizeOfFile" ColumnName="SizeOfFile" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="InitialWidth" ColumnName="InitialWidth" />
+                <ScalarProperty Name="InitialHeight" ColumnName="InitialHeight" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -450,16 +419,6 @@
                 <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
                 <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
                 <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Baskets">
-            <EntityTypeMapping TypeName="db_1417800_CO5027Model.Basket">
-              <MappingFragment StoreEntitySet="Basket">
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

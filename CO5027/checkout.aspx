@@ -3,30 +3,38 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headerContentPlaceHolder" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
-    <section class="page">
-        <h2>Checkout</h2>
-        <asp:Repeater ID="rptBasket" runat="server">
-            <HeaderTemplate>
-                <table>
-                    <th>
-                        <td>Photo</td>
-                        <td>Description</td>
-                        <td>Size</td>
-                        <td>Price</td>
-                    </th>
-                </table>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td><img src="<%# Eval("Images.Product.Id", "~/files/images/watermarked/{0}.jpg") %>"
-                             alt="<%# Eval("Images.Product.Description") %>"
-                             width="100<%# Eval("Images.Width") %>"
-                             height="100<%# Eval("Images.Height") %>" /></td>
-                    <td><%# Eval("Images.Product.Name") %></td>
-                    <td><%# Eval("Images.Size.Name") %></td>
-                    <td><%# Eval("Images.Size.Price") %></td>
-                </tr>
-            </ItemTemplate>
-        </asp:Repeater>
-    </section>
+    <asp:Panel ID="pnlBasket" runat="server">
+        <section class="page">
+            <h2>Basket</h2>
+            <asp:Repeater ID="rptBasket" runat="server">
+                <HeaderTemplate>
+                    <table>
+                        <th>
+                            <td>Photo</td>
+                            <td>Description</td>
+                            <td>Price</td>
+                        </th>
+                    </table>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
+                                alt="<%# Eval("ProductDescription") %>"
+                                width="<%# Eval("ImageWidth") %>" <% // TODO: Ask Andrew how to fetch correct sizes from db %>
+                                height="<%# Eval("ImageHeight") %>" /></td>
+                        <td><%# Eval("ProductName") %></td>
+                        <%--<td><%# Eval("Product.Price") %></td>--%>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+            <asp:Button ID="btnContinue" runat="server" Text="Continue to Checkout" OnClick="btnContinue_Click" />
+        </section>
+    </asp:Panel>
+    <asp:Panel ID="pnlCheckout" runat="server">
+        <section class="page">
+            <h2>Checkout</h2>
+                <asp:Button ID="btnConfirmOrder" runat="server" Text="Place Order" OnClick="btnConfirmOrder_Click" />
+        </section>
+    </asp:Panel>
 </asp:Content>
