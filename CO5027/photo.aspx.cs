@@ -74,7 +74,7 @@ namespace CO5027
                 basketEntry.Qty = qty;
                 db.Baskets.Add(basketEntry);
                 db.SaveChangesAsync();
-                Response.Redirect("~/basket.aspx");
+                Response.Redirect("~/checkout.aspx");
             }
             else
             {

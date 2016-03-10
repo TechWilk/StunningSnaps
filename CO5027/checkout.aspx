@@ -21,17 +21,17 @@
                         <td>
                             <img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
                                 alt="<%# Eval("ProductDescription") %>"
-                                width="<%# Eval("ImageWidth") %>" <% // TODO: Ask Andrew how to fetch correct sizes from db %>
+                                width="<%# Eval("ImageWidth") %>"
                                 height="<%# Eval("ImageHeight") %>" /></td>
                         <td><%# Eval("ProductName") %></td>
-                        <%--<td><%# Eval("Product.Price") %></td>--%>
+                        <td><%# Eval("Price") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
             <asp:Button ID="btnContinue" runat="server" Text="Continue to Checkout" OnClick="btnContinue_Click" />
         </section>
     </asp:Panel>
-    <asp:Panel ID="pnlCheckout" runat="server">
+    <asp:Panel ID="pnlCheckout" runat="server" Visible="False">
         <section class="page">
             <h2>Checkout</h2>
                 <asp:Button ID="btnConfirmOrder" runat="server" Text="Place Order" OnClick="btnConfirmOrder_Click" />
