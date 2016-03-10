@@ -117,7 +117,7 @@ namespace CO5027.user
             var lastName = userDetails.Surname;
 
             string emailBody = "";
-            emailBody += "New user created with username (" + firstName + lastName + ")" + Environment.NewLine;
+            emailBody += "New user created " + user.UserName + "(" + firstName + " " + lastName + ", " + email + ")" + Environment.NewLine;
             // todo: complete email message
 
             Email.sendEmail("stunningsnaps@wilk.tech", "stunningsnaps@wilk.tech", "New Account Created: " + user.UserName, emailBody);

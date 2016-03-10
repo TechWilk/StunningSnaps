@@ -18,8 +18,7 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td>
-                            <img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
+                        <td><img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
                                 alt="<%# Eval("ProductDescription") %>"
                                 width="<%# Eval("ImageWidth") %>"
                                 height="<%# Eval("ImageHeight") %>" /></td>
