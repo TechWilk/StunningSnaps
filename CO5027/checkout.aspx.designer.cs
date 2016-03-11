@@ -22,6 +22,15 @@ namespace CO5027 {
         protected global::System.Web.UI.WebControls.Panel pnlBasket;
         
         /// <summary>
+        /// pnlBasketItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBasketItems;
+        
+        /// <summary>
         /// rptBasket control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace CO5027 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnContinue;
+        
+        /// <summary>
+        /// litBasketMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litBasketMessage;
         
         /// <summary>
         /// pnlCheckout control.

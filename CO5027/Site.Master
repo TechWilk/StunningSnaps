@@ -15,13 +15,13 @@
         <div>
             <header>
                 <a class="logo" href="~/" runat="server">
-                    <img alt="StunningSnaps logo - [more description here]" src="~/files/images/logo.png" width="60" height="60" runat="server" />
+                    <img alt="StunningSnaps logo - White outline, on a dark backgrount, of a simple camera made out of rounded rectangles." src="~/files/images/logo.png" width="60" height="60" runat="server" />
                     <h1>StunningSnaps</h1>
                 </a>
                 <nav class="main">
                     <ul>
                         <li><a href="~/" runat="server">Browse</a></li>
-                        <li><a href="checkout.aspx" runat="server">Checkout</a></li>
+                        <li><a href="checkout.aspx" runat="server">Basket<asp:Literal ID="litBasketQty" runat="server"></asp:Literal></a></li>
                         <li><a href="~/user/" runat="server"><%= (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true) ? "My Account" : "Login" %></a></li>
                         <li><a href="~/contact.aspx" runat="server">Contact</a></li>
                         <%= (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true) ? "<li><a href=\"" + ResolveUrl("~/login.aspx?action=logout") + "\" runat=\"server\">Logout</a></li>" : "" %>

@@ -131,6 +131,7 @@ namespace CO5027.user
             {
                 manager.ChangePassword(User.Identity.GetUserId(), txtEditOldPassword.Text, txtEditPassword.Text);
                 litEditStatus.Text = "Password changed successfully.";
+                pnlEditInput.Visible = false;
             }
             catch
             {
@@ -149,12 +150,14 @@ namespace CO5027.user
             {
                 DatabaseCO5027Entities db = new DatabaseCO5027Entities();
                 var basketEntry = new Basket();
-                basketEntry.CustomerId = User.Identity.GetUserId();
+                basketEntry.CustomerId = user.Id;
                 basketEntry.ProductId = (int)Session["basketProductId"];
                 db.Baskets.Add(basketEntry);
-                db.SaveChangesAsync();
+                db.SaveChanges();
 
                 Session.Remove("basketProductId");
+
+                Response.Redirect("~/checkout.aspx");
             }
 
             if (Request.QueryString["ReturnUrl"] == null)

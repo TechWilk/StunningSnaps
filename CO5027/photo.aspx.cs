@@ -37,8 +37,8 @@ namespace CO5027
                 Response.Redirect("~/");
             }
 
-            string photoInfoFormatted = "<h3>" + photo.Name + "</h3>";
-            photoInfoFormatted += "<p>" + photo.Description + "</p>";
+            string photoInfoFormatted = "<h3>" + Server.HtmlEncode(photo.Name) + "</h3>";
+            photoInfoFormatted += "<p>" + Server.HtmlEncode(photo.Description) + "</p>";
 
             // TODO: add price & options to buy
 
@@ -54,7 +54,7 @@ namespace CO5027
             var image = photo.Images.FirstOrDefault(p => p.SizeId == 2);
 
             imgPhoto.Src = "~/files/images/watermarked/" + id.ToString() + "-2.jpg";
-            imgPhoto.Alt = photo.Description;
+            imgPhoto.Alt = Server.HtmlEncode(photo.Description);
             imgPhoto.Width = image.Width;
             imgPhoto.Height = image.Height;
         }
@@ -64,16 +64,17 @@ namespace CO5027
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
             int productId = int.Parse(Request.QueryString["id"]);
+            string userId = User.Identity.GetUserId();
             try
             {
-                db.Baskets.Single(i => i.ProductId == productId);
+                db.Baskets.Single(i => i.ProductId == productId && i.CustomerId == userId);
             }
             catch
             {
                 if (User.Identity.IsAuthenticated)
                 {
                     var basketEntry = new Basket();
-                    basketEntry.CustomerId = User.Identity.GetUserId();
+                    basketEntry.CustomerId = userId;
                     basketEntry.ProductId = productId;
                     db.Baskets.Add(basketEntry);
                     db.SaveChangesAsync();

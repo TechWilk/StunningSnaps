@@ -12,11 +12,11 @@
         <asp:Repeater ID="rptPhotos" runat="server" OnItemCommand="rptPhotos_ItemCommand">
             <HeaderTemplate>
                 <table>
-                    <th>
-                        <td></td>
-                        <td>Name</td>
-                        <td>Archived</td>
-                    </th>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Archived</th>
+                    </tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>

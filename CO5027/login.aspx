@@ -67,27 +67,29 @@
             </div>
         </asp:Panel>
         <asp:Panel ID="pnlEdit" runat="server" Visible="False">
-            <h2>Edit</h2>
+            <h2>Change Password</h2>
             <div class="edit">
-                <div>
-                    <asp:Label runat="server" AssociatedControlID="txtEditOldPassword">Password</asp:Label>
-                    <asp:TextBox runat="server" ID="txtEditOldPassword" TextMode="Password" />
-                    <asp:RequiredFieldValidator ID="EditOldPasswordRequiredFieldValidator" runat="server" ErrorMessage="Existing password is required" ValidationGroup="Edit" ControlToValidate="txtEditOldPassword"></asp:RequiredFieldValidator>
-                </div>
-                <div>
-                    <asp:Label runat="server" AssociatedControlID="txtEditPassword">Password</asp:Label>
-                    <asp:TextBox runat="server" ID="txtEditPassword" TextMode="Password" />
-                    <asp:RequiredFieldValidator ID="EditPasswordRequiredFieldValidator" runat="server" ErrorMessage="Password is required" ValidationGroup="Edit" ControlToValidate="txtEditPassword"></asp:RequiredFieldValidator>
-                </div>
-                <div>
-                    <asp:Label runat="server" AssociatedControlID="txtEditConfirmPassword">Confirm password</asp:Label>
-                    <asp:TextBox runat="server" ID="txtEditConfirmPassword" TextMode="Password" />
-                    <asp:CompareValidator ID="EditConfirmPasswordCompareValidator" runat="server" ErrorMessage="Passwords do not match, please try again." ValidationGroup="Edit" ControlToValidate="txtEditPassword" ControlToCompare="txtEditConfirmPassword"></asp:CompareValidator>
-                </div>
-                <div>
-                    <asp:Literal ID="litEditStatus" runat="server"></asp:Literal>
-                    <asp:Button ID="btnEdit" runat="server" Text="Change Password" OnClick="btnEdit_Click" ValidationGroup="Edit" />
-                </div>
+                <asp:Panel ID="pnlEditInput" runat="server">
+                    <div>
+                        <asp:Label runat="server" AssociatedControlID="txtEditOldPassword">Current Password</asp:Label>
+                        <asp:TextBox runat="server" ID="txtEditOldPassword" TextMode="Password" />
+                        <asp:RequiredFieldValidator ID="EditOldPasswordRequiredFieldValidator" runat="server" ErrorMessage="Existing password is required" ValidationGroup="Edit" ControlToValidate="txtEditOldPassword"></asp:RequiredFieldValidator>
+                    </div>
+                    <div>
+                        <asp:Label runat="server" AssociatedControlID="txtEditPassword">New Password</asp:Label>
+                        <asp:TextBox runat="server" ID="txtEditPassword" TextMode="Password" />
+                        <asp:RequiredFieldValidator ID="EditPasswordRequiredFieldValidator" runat="server" ErrorMessage="Password is required" ValidationGroup="Edit" ControlToValidate="txtEditPassword"></asp:RequiredFieldValidator>
+                    </div>
+                    <div>
+                        <asp:Label runat="server" AssociatedControlID="txtEditConfirmPassword">Confirm new password</asp:Label>
+                        <asp:TextBox runat="server" ID="txtEditConfirmPassword" TextMode="Password" />
+                        <asp:CompareValidator ID="EditConfirmPasswordCompareValidator" runat="server" ErrorMessage="Passwords do not match, please try again." ValidationGroup="Edit" ControlToValidate="txtEditPassword" ControlToCompare="txtEditConfirmPassword"></asp:CompareValidator>
+                    </div>
+                    <div>
+                        <asp:Button ID="btnEdit" runat="server" Text="Change Password" OnClick="btnEdit_Click" ValidationGroup="Edit" />
+                    </div>
+                </asp:Panel>
+                <asp:Literal ID="litEditStatus" runat="server"></asp:Literal>
             </div>
         </asp:Panel>
     </section>

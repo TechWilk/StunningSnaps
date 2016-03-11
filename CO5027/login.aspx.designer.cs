@@ -229,6 +229,15 @@ namespace CO5027.user {
         protected global::System.Web.UI.WebControls.Panel pnlEdit;
         
         /// <summary>
+        /// pnlEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlEditInput;
+        
+        /// <summary>
         /// txtEditOldPassword control.
         /// </summary>
         /// <remarks>
@@ -283,15 +292,6 @@ namespace CO5027.user {
         protected global::System.Web.UI.WebControls.CompareValidator EditConfirmPasswordCompareValidator;
         
         /// <summary>
-        /// litEditStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litEditStatus;
-        
-        /// <summary>
         /// btnEdit control.
         /// </summary>
         /// <remarks>
@@ -299,5 +299,14 @@ namespace CO5027.user {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEdit;
+        
+        /// <summary>
+        /// litEditStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litEditStatus;
     }
 }

@@ -44,6 +44,12 @@ namespace CO5027
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
             var basket = db.Baskets.Where(b => b.CustomerId == customerId).ToList();
 
+            if (basket.Count < 1)
+            {
+                pnlBasketItems.Visible = false;
+                litBasketMessage.Text = "You have no items in your basket.";
+            }
+
             decimal totalCost = 0;
 
             var basketToDisplay = new List<BasketDisplay>();
@@ -125,7 +131,7 @@ namespace CO5027
 
             List<Item> items = new List<Item>();
 
-            foreach(OrderedProduct product in products)
+            foreach (OrderedProduct product in products)
             {
                 Item item = new Item
                 {
@@ -235,52 +241,84 @@ namespace CO5027
             string customerName = customer.FirstName + " " + customer.Surname;
             string customerEmailAddress = customer.Email;
 
-            SendEmailToAdmin(customer);
-            SendEmailToCustomer(customer);
+            SendEmailToAdmin(customer, order, products.ToList());
+            SendEmailToCustomer(customer, order, products.ToList());
 
             Response.Redirect("~/");
         }
-        protected void SendEmailToAdmin(UserDetail customer)
+        protected void SendEmailToAdmin(UserDetail customer, Order order, List<OrderedProduct> products)
         {
             string customerName = customer.FirstName + " " + customer.Surname;
-            string customerEmailAddress = customer.Email;
 
             // format email for admin
 
             string emailBody = "Email Sumbitted:" + Environment.NewLine;
             emailBody += "FROM: " + customerName + Environment.NewLine;
-            emailBody += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
+            emailBody += "REPLY TO: " + customer.Email + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "MESSAGE:" + Environment.NewLine;
             emailBody += "Thank you for your order" + Environment.NewLine; // todo: add proper message
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";
 
-            string subject = "New order from: " + customerName;
+            string subject = "New order: " + order.Id + " from: " + customerName;
 
             // Send email to admin
-            Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subject, emailBody);
+            Email.sendEmail("stunningsnaps@wilk.tech", customer.Email, subject, emailBody);
         }
-        protected void SendEmailToCustomer(UserDetail customer)
+        protected void SendEmailToCustomer(UserDetail customer, Order order, List<OrderedProduct> orderedProducts)
         {
             string customerName = customer.FirstName + " " + customer.Surname;
-            string customerEmailAddress = customer.Email;
 
             // format email for admin
 
-            string emailBody = "Email Sumbitted:" + Environment.NewLine;
-            emailBody += "FROM: " + customerName + Environment.NewLine;
-            emailBody += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
+            string emailBody = customer.FirstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "MESSAGE:" + Environment.NewLine;
-            emailBody += "Thank you for your order" + Environment.NewLine; // todo: add proper message
+            emailBody += "Thank you for your recient order at StunningSnaps." + Environment.NewLine;
+            emailBody += "For your records, please retain a copy of this email. " + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "You have purchaced:" + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "----------" + Environment.NewLine;
+
+            foreach (OrderedProduct orderedProduct in orderedProducts)
+            {
+                emailBody += orderedProduct.Product.Name + " (" + orderedProduct.Product.InitialHeight + " x " + orderedProduct.Product.InitialWidth + ")" + Environment.NewLine;
+                emailBody += "£" + ((decimal)orderedProduct.Product.Price).ToString("0.00") + Environment.NewLine;
+                emailBody += "https://1417800.studentwebserver.co.uk/user/download.aspx?id=" + orderedProduct.ProductId + Environment.NewLine;
+                emailBody += "----------" + Environment.NewLine;
+            }
+
+            emailBody += Environment.NewLine;
+            emailBody += "Each photo can be downloaded 5 times." + Environment.NewLine;
+            emailBody += "If you have trouble downloading, please contact us." + Environment.NewLine;
+            emailBody += "https://1417800.studentwebserver.co.uk/contact.aspx" + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Total Cost: £" + ((decimal)order.TotalCost).ToString("0.00") + Environment.NewLine;
+            emailBody += "Payment recieved with thanks" + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "Thank you for your order" + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";
 
-            string subject = "Thank you for your order at StunningSnaps";
+            string subject = "Thank you for your order at StunningSnaps (" + order.Id + ")";
 
             // Send email to admin
-            Email.sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", subject, emailBody);
+            Email.sendEmail(customer.Email, "stunningsnaps@wilk.tech", subject, emailBody);
+        }
+        protected void rptBasket_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            string idString = e.CommandArgument.ToString();
+
+            int id = int.Parse(idString);
+
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            var basketItem = db.Baskets.Single(b => b.Id == id);
+            db.Baskets.Remove(basketItem);
+
+            db.SaveChanges();
+            SetupBasket();
         }
     }
 }

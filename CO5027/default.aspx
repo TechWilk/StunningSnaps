@@ -15,8 +15,8 @@
                 <ItemTemplate>
                     <a class="item" href="<%# Eval("Id","photo.aspx?id={0}") %>" title="More info">
                         <figure>
-                            <img src="<%# Eval("Id","files/images/watermarked/{0}-2.jpg") %>" alt="<%# Eval("Description") %>" width="<%# Eval("InitialWidth") %>" height="<%# Eval("InitialHeight") %>"/>
-                            <figcaption><%# Eval("Name") %><span><%# Eval("InitialWidth",Eval("InitialHeight","{0}")+"x{0}") %></span></figcaption>
+                            <img src="<%# Eval("Id","files/images/watermarked/{0}-2.jpg") %>" alt="<%# Server.HtmlEncode((string)Eval("Description")) %>" width="<%# Eval("InitialWidth") %>" height="<%# Eval("InitialHeight") %>"/>
+                            <figcaption><%# Server.HtmlEncode((string)Eval("Name")) %><span><%# Eval("InitialWidth",Eval("InitialHeight","{0}")+"x{0}") %></span></figcaption>
                         </figure>
                     </a>
                 </ItemTemplate>
