@@ -171,8 +171,8 @@ namespace CO5027
                 },
                 redirect_urls = new RedirectUrls
                 {
-                    return_url = "http://localhost:64918/chechout.aspx?action=confirm",
-                    cancel_url = "http://localhost:64918/chechout.aspx?action=cancel"
+                    return_url = "http://localhost:64918/checkout.aspx?action=confirm",
+                    cancel_url = "http://localhost:64918/checkout.aspx?action=cancel"
                 }
             });
 
@@ -187,41 +187,41 @@ namespace CO5027
                 }
             }
         }
-        protected bool PayPalConfirmation()
+        protected void PayPalConfirmation(string paymentId, string payerId)
         {
             var config = ConfigManager.Instance.GetProperties();
             var accessToken = new OAuthTokenCredential(config).GetAccessToken();
             var apiContext = new APIContext(accessToken);
 
-            string paymentId = Request.QueryString["paymentId"];
-            string payerId = Request.QueryString["payerId"];
-            if (String.IsNullOrEmpty(paymentId) || String.IsNullOrEmpty(payerId))
-            {
-                return false;
-            }
-
             var payment = new Payment() { id = paymentId };
             var paymentExecution = new PaymentExecution() { payer_id = payerId };
 
             payment.Execute(apiContext, paymentExecution);
-            return true;
         }
         protected void btnConfirmOrder_Click(object sender, EventArgs e)
         {
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
-            if (!PayPalConfirmation())
+            string paymentId = Request.QueryString["paymentId"];
+            string payerId = Request.QueryString["payerId"];
+
+            Order order = db.Orders.Single(o => o.PaymentId == paymentId);
+
+            if (String.IsNullOrEmpty(paymentId) || String.IsNullOrEmpty(payerId))
             {
                 litConfirmMessage.Text = "<p>Payment aborted. You have not been charged. Please reorder the required products.</p>";
                 btnConfirmOrder.Visible = false;
-                Order order = db.Orders.Single(o => o.Id == 1); //todo fetch order id from PayPal redirect
                 db.Orders.Remove(order);
                 return;
             }
 
-            int orderId = 1; // todo: fetch order id from PayPal
+            PayPalConfirmation(paymentId, payerId);
 
-            var products = db.OrderedProducts.Where(op => op.OrderId == orderId);
+            order.PaymentId = paymentId;
+            order.PayerId = payerId;
+            order.AmountPaid = order.TotalCost;
+
+            var products = db.OrderedProducts.Where(op => op.OrderId == order.Id);
 
             foreach (var product in products)
             {
@@ -247,19 +247,19 @@ namespace CO5027
 
             // format email for admin
 
-            string emailToAdmin = "Email Sumbitted:" + Environment.NewLine;
-            emailToAdmin += "FROM: " + customerName + Environment.NewLine;
-            emailToAdmin += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
-            emailToAdmin += Environment.NewLine;
-            emailToAdmin += "MESSAGE:" + Environment.NewLine;
-            emailToAdmin += "Thank you for your order" + Environment.NewLine; // todo: add proper message
-            emailToAdmin += Environment.NewLine;
-            emailToAdmin += "Message sent though StunningSnaps website";
+            string emailBody = "Email Sumbitted:" + Environment.NewLine;
+            emailBody += "FROM: " + customerName + Environment.NewLine;
+            emailBody += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "MESSAGE:" + Environment.NewLine;
+            emailBody += "Thank you for your order" + Environment.NewLine; // todo: add proper message
+            emailBody += Environment.NewLine;
+            emailBody += "Message sent though StunningSnaps website";
 
-            string subjectToAdmin = "New message from: " + customerName;
+            string subject = "New order from: " + customerName;
 
             // Send email to admin
-            Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin);
+            Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subject, emailBody);
         }
         protected void SendEmailToCustomer(UserDetail customer)
         {
@@ -268,19 +268,19 @@ namespace CO5027
 
             // format email for admin
 
-            string emailToAdmin = "Email Sumbitted:" + Environment.NewLine;
-            emailToAdmin += "FROM: " + customerName + Environment.NewLine;
-            emailToAdmin += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
-            emailToAdmin += Environment.NewLine;
-            emailToAdmin += "MESSAGE:" + Environment.NewLine;
-            emailToAdmin += "Thank you for your order" + Environment.NewLine; // todo: add proper message
-            emailToAdmin += Environment.NewLine;
-            emailToAdmin += "Message sent though StunningSnaps website";
+            string emailBody = "Email Sumbitted:" + Environment.NewLine;
+            emailBody += "FROM: " + customerName + Environment.NewLine;
+            emailBody += "REPLY TO: " + customerEmailAddress + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "MESSAGE:" + Environment.NewLine;
+            emailBody += "Thank you for your order" + Environment.NewLine; // todo: add proper message
+            emailBody += Environment.NewLine;
+            emailBody += "Message sent though StunningSnaps website";
 
-            string subjectToAdmin = "New message from: " + customerName;
+            string subject = "Thank you for your order at StunningSnaps";
 
             // Send email to admin
-            Email.sendEmail("stunningsnaps@wilk.tech", customerEmailAddress, subjectToAdmin, emailToAdmin);
+            Email.sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", subject, emailBody);
         }
     }
 }

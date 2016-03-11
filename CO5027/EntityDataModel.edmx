@@ -45,6 +45,7 @@
           <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DateStamp" Type="datetime" Nullable="false" />
+          <Property Name="PayerId" Type="nvarchar" MaxLength="50" />
           <Property Name="PaymentId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Products">
@@ -352,6 +353,7 @@
           <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaymentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderedProducts" Relationship="db_1417800_CO5027Model.FK_OrderedProducts_Orders" FromRole="Order" ToRole="OrderedProduct" />
+          <Property Name="PayerId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_OrderedProducts_Orders">
           <End Type="db_1417800_CO5027Model.Order" Role="Order" Multiplicity="1">
@@ -445,6 +447,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="db_1417800_CO5027Model.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PayerId" ColumnName="PayerId" />
                 <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
                 <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
                 <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />

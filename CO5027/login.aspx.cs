@@ -117,14 +117,25 @@ namespace CO5027.user
             var lastName = userDetails.Surname;
 
             string emailBody = "";
-            emailBody += "New user created " + user.UserName + "(" + firstName + " " + lastName + ", " + email + ")" + Environment.NewLine;
+            emailBody += "New user created: " + firstName + " " + lastName + "(" + user.UserName + ", " + email + ")" + Environment.NewLine;
             // todo: complete email message
 
             Email.sendEmail("stunningsnaps@wilk.tech", "stunningsnaps@wilk.tech", "New Account Created: " + user.UserName, emailBody);
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            // TODO: change password
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindById(User.Identity.GetUserId());
+            try
+            {
+                manager.ChangePassword(User.Identity.GetUserId(), txtEditOldPassword.Text, txtEditPassword.Text);
+                litEditStatus.Text = "Password changed successfully.";
+            }
+            catch
+            {
+                litEditStatus.Text = "Existing password is incorrect, please try again.";
+            }
         }
         protected void Login(IdentityUser user, UserManager<IdentityUser> manager)
         {

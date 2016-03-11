@@ -36,17 +36,18 @@
                 </div>
                 <div>
                     <asp:Label runat="server" AssociatedControlID="txtRegisterFirstName">First Name</asp:Label>
-                    <asp:TextBox runat="server" ID="txtRegisterFirstName" />
+                    <asp:TextBox runat="server" ID="txtRegisterFirstName" MaxLength="50" />
                     <asp:RequiredFieldValidator ID="RegisterFirstNameRequiredFieldValidator" runat="server" ErrorMessage="Name is required" ValidationGroup="Register" ControlToValidate="txtRegisterFirstName"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Label runat="server" AssociatedControlID="txtRegisterSurname">Surame</asp:Label>
-                    <asp:TextBox runat="server" ID="txtRegisterSurname" />
+                    <asp:TextBox runat="server" ID="txtRegisterSurname" MaxLength="50" />
                     <asp:RequiredFieldValidator ID="RegisterSurnameRequiredFieldValidator" runat="server" ErrorMessage="Name is required" ValidationGroup="Register" ControlToValidate="txtRegisterSurname"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Label runat="server" AssociatedControlID="txtRegisterEmail">Email Address</asp:Label>
                     <asp:TextBox runat="server" ID="txtRegisterEmail" />
+                    <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ErrorMessage="Invalid email address. Please enter a valid email address." Display="Dynamic" ControlToValidate="txtRegisterEmail" ValidationExpression="\w+(.+\w+)*[@]\w+([.]\w+)+"></asp:RegularExpressionValidator>
                     <asp:RequiredFieldValidator ID="RegisterEmailRequiredFieldValidator" runat="server" ErrorMessage="Email address is required" ValidationGroup="Register" ControlToValidate="txtRegisterEmail"></asp:RequiredFieldValidator>
                 </div>
                 <div>
@@ -69,6 +70,11 @@
             <h2>Edit</h2>
             <div class="edit">
                 <div>
+                    <asp:Label runat="server" AssociatedControlID="txtEditOldPassword">Password</asp:Label>
+                    <asp:TextBox runat="server" ID="txtEditOldPassword" TextMode="Password" />
+                    <asp:RequiredFieldValidator ID="EditOldPasswordRequiredFieldValidator" runat="server" ErrorMessage="Existing password is required" ValidationGroup="Edit" ControlToValidate="txtEditOldPassword"></asp:RequiredFieldValidator>
+                </div>
+                <div>
                     <asp:Label runat="server" AssociatedControlID="txtEditPassword">Password</asp:Label>
                     <asp:TextBox runat="server" ID="txtEditPassword" TextMode="Password" />
                     <asp:RequiredFieldValidator ID="EditPasswordRequiredFieldValidator" runat="server" ErrorMessage="Password is required" ValidationGroup="Edit" ControlToValidate="txtEditPassword"></asp:RequiredFieldValidator>
@@ -79,6 +85,7 @@
                     <asp:CompareValidator ID="EditConfirmPasswordCompareValidator" runat="server" ErrorMessage="Passwords do not match, please try again." ValidationGroup="Edit" ControlToValidate="txtEditPassword" ControlToCompare="txtEditConfirmPassword"></asp:CompareValidator>
                 </div>
                 <div>
+                    <asp:Literal ID="litEditStatus" runat="server"></asp:Literal>
                     <asp:Button ID="btnEdit" runat="server" Text="Change Password" OnClick="btnEdit_Click" ValidationGroup="Edit" />
                 </div>
             </div>

@@ -24,7 +24,7 @@
                                 width="<%# Eval("ImageWidth") %>"
                                 height="<%# Eval("ImageHeight") %>" /></td>
                         <td><%# Eval("ProductName") %></td>
-                        <td><%# Eval("Price") %></td>
+                        <td>£<%# Eval("Price") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>

@@ -16,9 +16,14 @@ namespace CO5027.admin
         }
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            var name = txtName.Text;
+            decimal price;
+            if(!Decimal.TryParse(txtPrice.Text, out price))
+            {
+                litFeedback.Text = "Please enter a price in the formal: 5.20";
+                return;
+            }
 
-            if (uploadImage(txtName.Text, txtDescription.Text))
+            if (uploadImage(txtName.Text, txtDescription.Text, price))
             {
                 txtName.Text = "";
                 txtDescription.Text = "";
@@ -26,7 +31,7 @@ namespace CO5027.admin
             }
         }
 
-        private bool uploadImage(string name, string description)
+        private bool uploadImage(string name, string description, decimal price)
         {
             bool success = false;
             string fileExtention = System.IO.Path.GetExtension(fUplPictureUpload.FileName).ToLower();
@@ -45,6 +50,7 @@ namespace CO5027.admin
                     product.Archived = false;
                     product.Name = name;
                     product.Description = description;
+                    product.Price = price;
                     product.InitialHeight = height;
                     product.InitialWidth = width;
                     product.Extension = fileExtention;

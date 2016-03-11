@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CO5027.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CO5027
 {
@@ -13,7 +14,18 @@ namespace CO5027
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                    var userId = User.Identity.GetUserId();
+                    var user = db.UserDetails.Single(u => u.UserId == userId);
+                    txtName.Text = user.FirstName + " " + user.Surname;
+                    txtEmail.Text = user.Email;
+                    txtEmailConfirm.Text = user.Email;
+                }
+            }
         }
 
         protected void btnSendEmail_Click(object sender, EventArgs e)

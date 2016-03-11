@@ -20,6 +20,11 @@
                 <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvDescription" runat="server" ErrorMessage="Description is required" ControlToValidate="txtDescription"></asp:RequiredFieldValidator>
             </div>
+            <div>
+                <asp:Label ID="lblPrice" runat="server" Text="Price of image (£)" AssociatedControlID="txtPrice"></asp:Label>
+                <asp:TextBox ID="txtPrice" runat="server" TextMode="Number">5</asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvPrice" runat="server" ErrorMessage="Price is required" ControlToValidate="txtPrice"></asp:RequiredFieldValidator>
+            </div>
             <asp:Button ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click" />
             <asp:Literal ID="litFeedback" runat="server"></asp:Literal>
         </div>
