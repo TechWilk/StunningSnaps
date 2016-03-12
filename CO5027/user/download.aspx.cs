@@ -26,6 +26,7 @@ namespace CO5027.user
             OrderedProduct orderedProduct = new OrderedProduct();
 
             string userId = User.Identity.GetUserId();
+            int remainingDownloads = 0;
 
             try
             {
@@ -37,6 +38,7 @@ namespace CO5027.user
                     {
                         downloadAllowed = true;
                         orderedProduct = item;
+                        remainingDownloads += (item.DownloadsAllowed - item.DownloadCount);
                     }
                 }
                 if (!downloadAllowed)
@@ -62,7 +64,7 @@ namespace CO5027.user
             orderedProduct.DownloadCount += 1;
             db.SaveChanges();
 
-            sendEmailToCustomer(orderedProduct);
+            sendEmailToCustomer(orderedProduct, remainingDownloads);
 
             try
             {
@@ -88,7 +90,7 @@ namespace CO5027.user
 
         }
 
-        protected void sendEmailToCustomer(OrderedProduct orderedProduct)
+        protected void sendEmailToCustomer(OrderedProduct orderedProduct, int remainingDownloads)
         {
             string userId = User.Identity.GetUserId();
 
@@ -96,7 +98,7 @@ namespace CO5027.user
             UserDetail customer = db.UserDetails.Single(u => u.UserId == userId);
             db.Dispose();
 
-            int remainingDownloads = orderedProduct.DownloadsAllowed - orderedProduct.DownloadCount;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
             string emailBody = customer.FirstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
@@ -108,16 +110,15 @@ namespace CO5027.user
             emailBody += "----------" + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Need to download this photo again? " + Environment.NewLine;
-            emailBody += "https://1417800.studentwebserver.co.uk/user/download.aspx?id=" + orderedProduct.ProductId + Environment.NewLine;
+            emailBody += baseUrl + ResolveUrl("~/user/download.aspx?id=" + orderedProduct.ProductId) + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "If you have trouble downloading, please contact us." + Environment.NewLine;
-            emailBody += "https://1417800.studentwebserver.co.uk/contact.aspx" + Environment.NewLine;
+            emailBody += baseUrl + ResolveUrl("~/contact.aspx") + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";
 
             string subject = "Downloaded: " + orderedProduct.Product.Name + " from StunningSnaps";
 
-            // Send email to admin
             Email.sendEmail(customer.Email, "stunningsnaps@wilk.tech", subject, emailBody);
 
         }

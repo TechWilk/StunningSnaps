@@ -36,6 +36,7 @@ namespace CO5027
             string customerName = txtName.Text;
             string customerEmailAddress = txtEmail.Text;
             string customerMessage = txtMessage.Text;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
             // format email for admin
 
@@ -67,7 +68,7 @@ namespace CO5027
             emailToCustomer += customerMessage + Environment.NewLine;
             emailToCustomer += Environment.NewLine;
             emailToCustomer += "Message sent though StunningSnaps website" + Environment.NewLine;
-            emailToCustomer += "http://1417800.studentwebserver.co.uk/CO5027";
+            emailToCustomer += baseUrl + ResolveUrl("~/");
 
             // Send email to customer
             if (!Email.sendEmail(customerEmailAddress, "stunningsnaps@wilk.tech", "Message sent to StunningSnaps", emailToCustomer))

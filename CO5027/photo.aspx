@@ -6,7 +6,6 @@
     <section class="page">
         <h2>Photo</h2>
         <asp:Literal ID="litPhotoInfo" runat="server"></asp:Literal>
-        <asp:DropDownList ID="ddlSize" runat="server"></asp:DropDownList>
         <asp:Button ID="btnAddToBasket" runat="server" Text="Add to Basket" OnClick="btnAddToBasket_Click" />
         <img id="imgPhoto" runat="server" />
     </section>

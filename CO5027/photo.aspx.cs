@@ -40,15 +40,6 @@ namespace CO5027
             string photoInfoFormatted = "<h3>" + Server.HtmlEncode(photo.Name) + "</h3>";
             photoInfoFormatted += "<p>" + Server.HtmlEncode(photo.Description) + "</p>";
 
-            // TODO: add price & options to buy
-
-            var sizes = db.Sizes.Where(s => s.Archived == false).ToList();
-
-            ddlSize.DataTextField = "Name";
-            ddlSize.DataValueField = "Id";
-            ddlSize.DataSource = sizes;
-            ddlSize.DataBind();
-
             litPhotoInfo.Text = photoInfoFormatted;
 
             var image = photo.Images.FirstOrDefault(p => p.SizeId == 2);

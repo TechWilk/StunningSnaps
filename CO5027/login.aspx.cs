@@ -92,6 +92,7 @@ namespace CO5027.user
             var email = userDetails.Email;
             var firstName = userDetails.FirstName;
             var lastName = userDetails.Surname;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
             string emailBody = "";
             emailBody += "Hello " + firstName + "," + Environment.NewLine;
@@ -102,6 +103,7 @@ namespace CO5027.user
             emailBody += "Your password was set during account creation. If you need to reset your password, please follow the reset password instructions on the Login page." + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";
+            emailBody += baseUrl + ResolveUrl("~/");
 
             // todo: complete email message
 

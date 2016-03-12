@@ -12,5 +12,27 @@
             <li><a href="~/login.aspx" runat="server">Change Password</a></li>
         </ul>
 
+        <asp:Repeater ID="rptOrders" runat="server">
+            <HeaderTemplate>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Photos</th>
+                        <th>Remaining Downloads</th>
+                    </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td><%# Eval("Date") %></td>
+                    <td><%# Eval("Price","£{0}") %></td>
+                    <td><%# Eval("Photos") %></td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </table>
+            </FooterTemplate>
+        </asp:Repeater>
+
     </section>
 </asp:Content>

@@ -48,6 +48,7 @@ namespace CO5027
             {
                 pnlBasketItems.Visible = false;
                 litBasketMessage.Text = "You have no items in your basket.";
+                return;
             }
 
             decimal totalCost = 0;
@@ -125,6 +126,8 @@ namespace CO5027
         }
         protected void PayPalPayment(DatabaseCO5027Entities db, Order order, List<OrderedProduct> products)
         {
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
+
             var config = ConfigManager.Instance.GetProperties();
             var accessToken = new OAuthTokenCredential(config).GetAccessToken();
             var apiContext = new APIContext(accessToken);
@@ -177,8 +180,8 @@ namespace CO5027
                 },
                 redirect_urls = new RedirectUrls
                 {
-                    return_url = "http://localhost:64918/checkout.aspx?action=confirm",
-                    cancel_url = "http://localhost:64918/checkout.aspx?action=cancel"
+                    return_url = baseUrl + ResolveUrl("~/checkout.aspx?action=confirm"),
+                    cancel_url = baseUrl + ResolveUrl("~/checkout.aspx?action=cancel")
                 }
             });
 
@@ -269,6 +272,7 @@ namespace CO5027
         protected void SendEmailToCustomer(UserDetail customer, Order order, List<OrderedProduct> orderedProducts)
         {
             string customerName = customer.FirstName + " " + customer.Surname;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
             // format email for admin
 
@@ -285,14 +289,14 @@ namespace CO5027
             {
                 emailBody += orderedProduct.Product.Name + " (" + orderedProduct.Product.InitialHeight + " x " + orderedProduct.Product.InitialWidth + ")" + Environment.NewLine;
                 emailBody += "£" + ((decimal)orderedProduct.Product.Price).ToString("0.00") + Environment.NewLine;
-                emailBody += "https://1417800.studentwebserver.co.uk/user/download.aspx?id=" + orderedProduct.ProductId + Environment.NewLine;
+                emailBody += "Download: " + baseUrl + ResolveUrl("~/user/download.aspx?id=" + orderedProduct.ProductId) + Environment.NewLine;
                 emailBody += "----------" + Environment.NewLine;
             }
 
             emailBody += Environment.NewLine;
             emailBody += "Each photo can be downloaded 5 times." + Environment.NewLine;
             emailBody += "If you have trouble downloading, please contact us." + Environment.NewLine;
-            emailBody += "https://1417800.studentwebserver.co.uk/contact.aspx" + Environment.NewLine;
+            emailBody += baseUrl + ResolveUrl("~/contact.aspx") + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Total Cost: £" + ((decimal)order.TotalCost).ToString("0.00") + Environment.NewLine;
