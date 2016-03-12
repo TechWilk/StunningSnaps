@@ -18,6 +18,8 @@
 @footerLinkColor: @headerLinkColor;
 @footerLinkHoverColor: lighten(@footerBackgroundColor, 10%);
 
+@paleGrey: #f4f4f4;
+
 // Mixins
 .backgroundGradient(@colorTop, @colorBottom) {
     background-color: @colorBottom;
@@ -271,6 +273,16 @@ section > div {
         font-size: 1.05em;
         line-height: 1.4;
         border-left: 5px solid lighten(@footerBackgroundColor, 25%);
+    }
+}
+
+.products {
+    padding: 15px;
+    background-color: @paleGrey;
+    margin-bottom: 10px;
+
+    ul {
+        list-style: none;
     }
 }
 

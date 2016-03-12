@@ -99,7 +99,7 @@ namespace CO5027.user
             emailBody += Environment.NewLine;
             emailBody += "Thank you for signing up for an acount with StunningSnaps!" + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "Your username is:" + user.UserName + Environment.NewLine;
+            emailBody += "Your username is: " + user.UserName + Environment.NewLine;
             emailBody += "Your password was set during account creation. If you need to reset your password, please follow the reset password instructions on the Login page." + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";

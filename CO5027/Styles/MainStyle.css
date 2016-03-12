@@ -189,6 +189,14 @@ section > div {
   line-height: 1.4;
   border-left: 5px solid #626262;
 }
+.products {
+  padding: 15px;
+  background-color: #f4f4f4;
+  margin-bottom: 10px;
+}
+.products ul {
+  list-style: none;
+}
 footer {
   background-color: #222;
   color: #fff;

@@ -26,9 +26,11 @@ namespace CO5027
                 case "cancel":
                     pnlBasket.Visible = false;
                     pnlCancel.Visible = true;
+                    string token = Request.QueryString["token"];
                     DatabaseCO5027Entities db = new DatabaseCO5027Entities();
-                    Order order = db.Orders.Single(o => o.Id == 1); //todo fetch order id from PayPal redirect
+                    Order order = db.Orders.Single(o => o.PaymentToken == token);
                     db.Orders.Remove(order);
+                    db.SaveChanges();
                     litCancelMessage.Text = "<p>Invalid payment. You have not been charged. Please reorder the required products.</p>";
                     break;
 
@@ -76,14 +78,37 @@ namespace CO5027
                 totalCost += (decimal)item.Product.Price;
             }
 
-            // TODO: convert list to format useful for front-end table
-
             rptBasket.DataSource = basketToDisplay;
             rptBasket.DataBind();
         }
         private void SetupCheckout()
         {
-            // TODO: display summary of products and order details
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+
+            string paymentId = Request.QueryString["paymentId"];
+            string payerId = Request.QueryString["payerId"];
+            string token = Request.QueryString["token"];
+
+            Order order = db.Orders.Single(o => o.PaymentId == paymentId);
+
+            if (String.IsNullOrEmpty(paymentId) || String.IsNullOrEmpty(payerId) || String.IsNullOrEmpty(token))
+            {
+                litConfirmMessage.Text = "<p>Payment aborted. You have not been charged. Please reorder the required products.</p>";
+                btnConfirmOrder.Visible = false;
+                db.Orders.Remove(order);
+                db.SaveChanges();
+                return;
+            }
+            litConfirmOrderDetails.Text = "<p>Order: " + order.Id + "</p>";
+            litConfirmOrderDetails.Text += "<p>Price: £" + order.TotalCost + "</p>";
+            litConfirmOrderDetails.Text += "<h3>Products:</h3>";
+            litConfirmOrderDetails.Text += "<div class=\"products\"><ul>";
+
+            foreach (var item in order.OrderedProducts)
+            {
+                litConfirmOrderDetails.Text += "<li>" + item.Product.Name + " (£" + ((decimal)item.Product.Price).ToString("0.00") + ")</li>";
+            }
+            litConfirmOrderDetails.Text += "</ul></div>";
         }
 
         protected void btnContinue_Click(object sender, EventArgs e)
@@ -186,6 +211,7 @@ namespace CO5027
             });
 
             order.PaymentId = payment.id;
+            order.PaymentToken = payment.token;
             db.SaveChanges();
 
             foreach (var link in payment.links)
@@ -213,16 +239,9 @@ namespace CO5027
 
             string paymentId = Request.QueryString["paymentId"];
             string payerId = Request.QueryString["payerId"];
+            string token = Request.QueryString["token"];
 
-            Order order = db.Orders.Single(o => o.PaymentId == paymentId);
-
-            if (String.IsNullOrEmpty(paymentId) || String.IsNullOrEmpty(payerId))
-            {
-                litConfirmMessage.Text = "<p>Payment aborted. You have not been charged. Please reorder the required products.</p>";
-                btnConfirmOrder.Visible = false;
-                db.Orders.Remove(order);
-                return;
-            }
+            Order order = db.Orders.Single(o => o.PaymentId == paymentId && o.PaymentToken == token);
 
             PayPalConfirmation(paymentId, payerId);
 

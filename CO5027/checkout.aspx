@@ -40,6 +40,10 @@
         </asp:Panel>
         <asp:Panel ID="pnlCheckout" runat="server" Visible="False">
             <h2>Checkout</h2>
+            <div>
+                <asp:Literal ID="litConfirmOrderDetails" runat="server"></asp:Literal>
+                <p>Please confirm the order details and place the order.</p>
+            </div>
             <asp:Literal ID="litConfirmMessage" runat="server"></asp:Literal>
             <asp:Button ID="btnConfirmOrder" runat="server" Text="Place Order" OnClick="btnConfirmOrder_Click" />
         </asp:Panel>
