@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,12 @@ namespace CO5027.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string customerId = User.Identity.GetUserId();
+            DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+            var orders = db.Orders.Where(o => o.CustomerId == customerId).OrderByDescending(o => o.DateStamp).ToList();
 
+            rptOrders.DataSource = orders;
+            rptOrders.DataBind();
         }
     }
 }

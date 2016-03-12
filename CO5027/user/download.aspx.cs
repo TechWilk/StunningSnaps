@@ -62,6 +62,7 @@ namespace CO5027.user
 
             // count download
             orderedProduct.DownloadCount += 1;
+            remainingDownloads -= 1;
             db.SaveChanges();
 
             sendEmailToCustomer(orderedProduct, remainingDownloads);

@@ -11,27 +11,24 @@
             <li><a href="~/user/orders.aspx" runat="server">View Orders</a></li>
             <li><a href="~/login.aspx" runat="server">Change Password</a></li>
         </ul>
-
+        <h3>Orders</h3>
         <asp:Repeater ID="rptOrders" runat="server">
-            <HeaderTemplate>
-                <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>Price</th>
-                        <th>Photos</th>
-                        <th>Remaining Downloads</th>
-                    </tr>
-            </HeaderTemplate>
             <ItemTemplate>
-                <tr>
-                    <td><%# Eval("Date") %></td>
-                    <td><%# Eval("Price","£{0}") %></td>
-                    <td><%# Eval("Photos") %></td>
-                </tr>
+                <div class="order">
+                    <p><strong>Order: <%# Eval("Id") %></strong></p>
+                    <p>Date: <%# Eval("DateStamp") %></p>
+                    <p>Paid: <%# Eval("TotalCost","£{0}") %></p>
+                    <asp:Repeater ID="rptOrderedProducts" runat="server" DataSource='<%# Eval("OrderedProducts") %>'>
+                        <ItemTemplate>
+                            <div class="product">
+                                <p><strong><%# Eval("Product.Name") %></strong></p>
+                                <p>Remaining Downloads: <%# (int)Eval("DownloadsAllowed") - (int)Eval("DownloadCount") %></p>
+                                <%# ((int)Eval("DownloadsAllowed") - (int)Eval("DownloadCount") > 0) ? ("<a href=\"" + Eval("ProductId",ResolveUrl("~/user/download.aspx?id={0}")) + "\">Download</a>") : "" %>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
             </ItemTemplate>
-            <FooterTemplate>
-                </table>
-            </FooterTemplate>
         </asp:Repeater>
 
     </section>

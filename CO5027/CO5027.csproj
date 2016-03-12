@@ -201,7 +201,6 @@
     <Content Include="user\default.aspx" />
     <Content Include="login.aspx" />
     <Content Include="user\download.aspx" />
-    <Content Include="user\orders.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -319,13 +318,6 @@
     </Compile>
     <Compile Include="user\download.aspx.designer.cs">
       <DependentUpon>download.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="user\orders.aspx.cs">
-      <DependentUpon>orders.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="user\orders.aspx.designer.cs">
-      <DependentUpon>orders.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

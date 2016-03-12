@@ -266,7 +266,7 @@ namespace CO5027
             SendEmailToAdmin(customer, order, products.ToList());
             SendEmailToCustomer(customer, order, products.ToList());
 
-            Response.Redirect("~/");
+            Response.Redirect("~/user");
         }
         protected void SendEmailToAdmin(UserDetail customer, Order order, List<OrderedProduct> products)
         {
