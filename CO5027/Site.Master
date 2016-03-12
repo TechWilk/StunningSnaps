@@ -24,7 +24,7 @@
                         <li><a href="checkout.aspx" runat="server">Basket<asp:Literal ID="litBasketQty" runat="server"></asp:Literal></a></li>
                         <li><a href="~/user/" runat="server"><%= (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true) ? "My Account" : "Login" %></a></li>
                         <li><a href="~/contact.aspx" runat="server">Contact</a></li>
-                        <%= (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true) ? "<li><a href=\"" + ResolveUrl("~/login.aspx?action=logout") + "\" runat=\"server\">Logout</a></li>" : "" %>
+                        <%= (System.Web.HttpContext.Current.User.Identity.IsAuthenticated == true) ? "<li><a href=\"" + ResolveUrl("~/login.aspx?action=logout") + "\">Logout</a></li>" : "" %>
                     </ul>
                 </nav>
             </header>

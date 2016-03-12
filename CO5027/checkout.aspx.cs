@@ -14,29 +14,32 @@ namespace CO5027
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            switch (Request.QueryString["action"])
+            if (!IsPostBack)
             {
-                case "confirm":
-                    pnlBasket.Visible = false;
-                    pnlCheckout.Visible = true;
+                switch (Request.QueryString["action"])
+                {
+                    case "confirm":
+                        pnlBasket.Visible = false;
+                        pnlCheckout.Visible = true;
 
-                    SetupCheckout();
-                    break;
+                        SetupCheckout();
+                        break;
 
-                case "cancel":
-                    pnlBasket.Visible = false;
-                    pnlCancel.Visible = true;
-                    string token = Request.QueryString["token"];
-                    DatabaseCO5027Entities db = new DatabaseCO5027Entities();
-                    Order order = db.Orders.Single(o => o.PaymentToken == token);
-                    db.Orders.Remove(order);
-                    db.SaveChanges();
-                    litCancelMessage.Text = "<p>Invalid payment. You have not been charged. Please reorder the required products.</p>";
-                    break;
+                    case "cancel":
+                        pnlBasket.Visible = false;
+                        pnlCancel.Visible = true;
+                        string token = Request.QueryString["token"];
+                        DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                        Order order = db.Orders.Single(o => o.PaymentToken == token);
+                        db.Orders.Remove(order);
+                        db.SaveChanges();
+                        litCancelMessage.Text = "<p>Invalid payment. You have not been charged. Please reorder the required products.</p>";
+                        break;
 
-                default:
-                    SetupBasket();
-                    break;
+                    default:
+                        SetupBasket();
+                        break;
+                }
             }
         }
 
@@ -45,6 +48,11 @@ namespace CO5027
             string customerId = User.Identity.GetUserId();
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
             var basket = db.Baskets.Where(b => b.CustomerId == customerId).ToList();
+
+            if (IsPostBack && basket.Count < 1)
+            {
+                Response.Redirect("~/");
+            }
 
             if (basket.Count < 1)
             {
@@ -64,7 +72,6 @@ namespace CO5027
                 basketItem.CustomerId = item.CustomerId;
                 basketItem.Id = item.Id;
                 basketItem.ProductId = item.ProductId;
-                basketItem.Qty = item.Qty;
                 basketItem.ProductName = item.Product.Name;
                 basketItem.ProductDescription = item.Product.Description;
                 basketItem.Price = (decimal)item.Product.Price;
@@ -330,6 +337,7 @@ namespace CO5027
             // Send email to admin
             Email.sendEmail(customer.Email, "stunningsnaps@wilk.tech", subject, emailBody);
         }
+
         protected void rptBasket_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string idString = e.CommandArgument.ToString();

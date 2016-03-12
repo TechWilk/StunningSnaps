@@ -27,10 +27,10 @@ namespace CO5027
     
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
-        public virtual DbSet<Basket> Baskets { get; set; }
         public virtual DbSet<OrderedProduct> OrderedProducts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Basket> Baskets { get; set; }
     }
 }

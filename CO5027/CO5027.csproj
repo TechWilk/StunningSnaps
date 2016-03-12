@@ -114,6 +114,7 @@
   <ItemGroup>
     <Content Include="admin\add.aspx" />
     <Content Include="admin\default.aspx" />
+    <Content Include="admin\orders.aspx" />
     <Content Include="checkout.aspx" />
     <Content Include="contact.aspx" />
     <Content Include="default.aspx" />
@@ -217,6 +218,13 @@
     </Compile>
     <Compile Include="admin\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\orders.aspx.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\orders.aspx.designer.cs">
+      <DependentUpon>orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Basket.cs">
       <DependentUpon>EntityDataModel.tt</DependentUpon>

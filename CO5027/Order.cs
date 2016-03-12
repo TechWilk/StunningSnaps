@@ -28,6 +28,7 @@ namespace CO5027
         public string PayerId { get; set; }
         public string PaymentId { get; set; }
         public string PaymentToken { get; set; }
+        public bool Cancelled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }

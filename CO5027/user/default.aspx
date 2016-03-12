@@ -13,6 +13,9 @@
         </ul>
         <h3>Orders</h3>
         <asp:Repeater ID="rptOrders" runat="server">
+            <HeaderTemplate>
+                <div class="orders">
+            </HeaderTemplate>
             <ItemTemplate>
                 <div class="order">
                     <p><strong>Order: <%# Eval("Id") %></strong></p>
@@ -21,7 +24,7 @@
                     <asp:Repeater ID="rptOrderedProducts" runat="server" DataSource='<%# Eval("OrderedProducts") %>'>
                         <ItemTemplate>
                             <div class="product">
-                                <p><strong><%# Eval("Product.Name") %></strong></p>
+                                <p><strong><%# Server.HtmlEncode((string)Eval("Product.Name")) %></strong></p>
                                 <p>Remaining Downloads: <%# (int)Eval("DownloadsAllowed") - (int)Eval("DownloadCount") %></p>
                                 <%# ((int)Eval("DownloadsAllowed") - (int)Eval("DownloadCount") > 0) ? ("<a href=\"" + Eval("ProductId",ResolveUrl("~/user/download.aspx?id={0}")) + "\">Download</a>") : "" %>
                             </div>
@@ -29,6 +32,9 @@
                     </asp:Repeater>
                 </div>
             </ItemTemplate>
+            <FooterTemplate>
+                </div>
+            </FooterTemplate>
         </asp:Repeater>
 
     </section>

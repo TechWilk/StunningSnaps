@@ -10,7 +10,6 @@ namespace CO5027
         public int Id { get; set; }
         public string CustomerId { get; set; }
         public int ProductId { get; set; }
-        public int Qty { get; set; }
         public int ImageHeight { get; set; }
         public int ImageWidth { get; set; }
         public string ProductName { get; set; }

@@ -55,6 +55,9 @@ input:focus {
 textarea {
   height: 250px;
 }
+.warning {
+  color: red;
+}
 header {
   background-color: #222;
   color: #fff;
@@ -199,12 +202,15 @@ section > div {
 }
 .order {
   padding: 5px;
-  margin-bottom: 10px;
-  margin-top: 2rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1.5rem;
 }
 .order p {
   display: inline-block;
   padding: 5px;
+}
+.order input {
+  display: inline-block;
 }
 .order .product {
   padding: 0.8rem;
@@ -213,6 +219,7 @@ section > div {
 .order .product p {
   padding: 5px;
   margin-right: 1rem;
+  margin-bottom: 0;
 }
 footer {
   background-color: #222;
@@ -305,6 +312,10 @@ footer nav.validation li a:hover {
   }
   header nav.main ul {
     text-align: right;
+  }
+  textarea,
+  input {
+    max-width: 100%;
   }
 }
 @media (min-width: 860px) {
