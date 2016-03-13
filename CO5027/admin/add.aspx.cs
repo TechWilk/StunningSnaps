@@ -12,22 +12,64 @@ namespace CO5027.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                string idString = Request.QueryString["id"];
+                int id = 0;
+                if (int.TryParse(idString, out id))
+                {
+                    try
+                    {
+                        DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                        Product product = db.Products.Single(p => p.Id == id);
 
+                        txtName.Text = product.Name;
+                        txtDescription.Text = product.Description;
+                        txtPrice.Text = ((decimal)product.Price).ToString("0.00");
+
+                        btnUpload.Text = "Update";
+                    }
+                    catch
+                    {
+                        litFeedback.Text = "Error loading photo";
+                        pnlInputFields.Visible = false;
+                        btnUpload.Visible = false;
+
+                    }
+                    pnlUploadControl.Visible = false;
+                }
+            }
         }
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             decimal price;
-            if(!Decimal.TryParse(txtPrice.Text, out price))
+            if (!Decimal.TryParse(txtPrice.Text, out price))
             {
                 litFeedback.Text = "Please enter a price in the formal: 5.20";
                 return;
             }
 
-            if (uploadImage(txtName.Text, txtDescription.Text, price))
+            string idString = Request.QueryString["id"];
+            int id = 0;
+            if (int.TryParse(idString, out id))
             {
-                txtName.Text = "";
-                txtDescription.Text = "";
-                //Response.Redirect("~/");
+                DatabaseCO5027Entities db = new DatabaseCO5027Entities();
+                var product = db.Products.Single(p => p.Id == id);
+                product.Name = txtName.Text;
+                product.Description = txtDescription.Text;
+                product.Price = price;
+
+                db.SaveChanges();
+                Response.Redirect("~/admin");
+            }
+            else
+            {
+                if (uploadImage(txtName.Text, txtDescription.Text, price))
+                {
+                    txtName.Text = "";
+                    txtDescription.Text = "";
+                    Response.Redirect("~/admin");
+                }
             }
         }
 
@@ -63,7 +105,7 @@ namespace CO5027.admin
                     // save original image to disk
                     string filePath = Server.MapPath("~/files/images/original/" + filename + fileExtention);
                     img.Save(filePath);
-                    product.SizeOfFile = (int) new System.IO.FileInfo(filePath).Length;
+                    product.SizeOfFile = (int)new System.IO.FileInfo(filePath).Length;
                     db.SaveChanges();
 
                     // save watermarked images to disk

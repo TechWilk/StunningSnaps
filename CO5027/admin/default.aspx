@@ -27,6 +27,7 @@
                         <%# HttpUtility.HtmlEncode(Eval("Name")) %>
                     </td>
                     <td>
+                        <a href='<%# Eval("Id", ResolveUrl("~/admin/add.aspx?id=") + "{0}") %>'>Edit</a>
                         <asp:Button ID="btnArchive" runat="server" Text='<%# ((bool)Eval("Archived")) ? "Unarchive" : "Archive"  %>' CommandArgument='<%# Eval("Id") %>' />
                     </td>
                 </tr>

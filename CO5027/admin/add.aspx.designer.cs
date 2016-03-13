@@ -13,6 +13,15 @@ namespace CO5027.admin {
     public partial class add {
         
         /// <summary>
+        /// pnlUploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUploadControl;
+        
+        /// <summary>
         /// lblPictureUpload control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace CO5027.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fUplPictureUpload;
+        
+        /// <summary>
+        /// pnlInputFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlInputFields;
         
         /// <summary>
         /// lblName control.
