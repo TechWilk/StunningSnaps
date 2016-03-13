@@ -22,6 +22,8 @@ namespace CO5027.Models
 
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
 
+            img = AddWatermark(img);
+
             var sizes = db.Sizes.Where(s => s.Archived == false).ToList();
 
             foreach (var size in sizes)
@@ -36,7 +38,6 @@ namespace CO5027.Models
                 {
                     resizedImage = ImageManipulation.ResizeImage(img, maxWidth, maxHeight);
                 }
-                resizedImage = AddWatermark(resizedImage);
 
                 int newHeight = resizedImage.Height;
                 int newWidth = resizedImage.Width;
@@ -73,7 +74,43 @@ namespace CO5027.Models
 
         public static System.Drawing.Image AddWatermark(System.Drawing.Image img)
         {
-            // TODO: add watermark
+            int width = img.Width;
+            int height = img.Height;
+
+            int fontSize = width / 5;
+
+            string text = "StunningSnaps";
+            var g = Graphics.FromImage(img);
+            var brush = new SolidBrush(Color.FromArgb(70, 255, 255, 255));
+            var stringFormat = new StringFormat();
+            stringFormat.LineAlignment = StringAlignment.Center;
+            stringFormat.Alignment = StringAlignment.Center;
+
+            // code based upon 
+            // todo: reference http://stackoverflow.com/questions/9747559/c-sharp-adding-string-to-image-using-the-max-font-size
+            while (true)
+            {
+                var testFont = new Font(FontFamily.GenericSansSerif, fontSize);
+                var size = g.MeasureString(text, testFont);
+
+                if (size.Width < width)
+                {
+                    break;
+                }
+                else
+                {
+                    fontSize -= 5;
+                }
+
+                testFont.Dispose();
+            }
+            // end of code based upon
+
+            var font = new Font(FontFamily.GenericSansSerif, fontSize);
+
+            g.DrawString(text, font, brush, (width / 2), (height / 2), stringFormat);
+
+            g.Dispose();
             return img;
         }
     }

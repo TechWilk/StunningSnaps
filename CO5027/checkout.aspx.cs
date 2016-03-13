@@ -57,7 +57,7 @@ namespace CO5027
             if (basket.Count < 1)
             {
                 pnlBasketItems.Visible = false;
-                litBasketMessage.Text = "You have no items in your basket.";
+                litBasketMessage.Text = "<p>You have no items in your basket.</p>";
                 return;
             }
 

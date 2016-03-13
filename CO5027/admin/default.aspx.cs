@@ -34,10 +34,10 @@ namespace CO5027.admin
             db.Dispose();
             foreach (Product p in products)
             {
-                int id = p.Id;
-                string path = Server.MapPath("~/files/images/original/" + id.ToString() + p.Extension);
+                string path = Server.MapPath("~/files/images/original/" + p.Id.ToString() + p.Extension);
                 var img = System.Drawing.Image.FromFile(path);
-                imageProcessor.SaveWatermarkedImages(img, id);
+                imageProcessor.SaveWatermarkedImages(img, p.Id);
+                img.Dispose();
             }
         }
 

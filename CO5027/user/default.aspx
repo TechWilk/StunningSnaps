@@ -5,12 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section class="page">
         <h2>User</h2>
-        <ul>
-            <li><a href="~/user/add.aspx" runat="server">Add image</a></li>
-            <li><a href="~/user/manage.aspx" runat="server">Manage Images</a></li>
-            <li><a href="~/user/orders.aspx" runat="server">View Orders</a></li>
-            <li><a href="~/login.aspx" runat="server">Change Password</a></li>
-        </ul>
+        <p><a href="~/login.aspx" runat="server">Change Password</a></p>
         <h3>Orders</h3>
         <asp:Repeater ID="rptOrders" runat="server">
             <HeaderTemplate>
