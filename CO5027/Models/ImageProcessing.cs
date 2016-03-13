@@ -81,7 +81,7 @@ namespace CO5027.Models
 
             string text = "StunningSnaps";
             var g = Graphics.FromImage(img);
-            var brush = new SolidBrush(Color.FromArgb(70, 255, 255, 255));
+            var brush = new SolidBrush(Color.FromArgb(50, 255, 255, 255));
             var stringFormat = new StringFormat();
             stringFormat.LineAlignment = StringAlignment.Center;
             stringFormat.Alignment = StringAlignment.Center;
