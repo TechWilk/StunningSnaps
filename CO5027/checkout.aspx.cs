@@ -275,18 +275,31 @@ namespace CO5027
 
             Response.Redirect("~/user");
         }
-        protected void SendEmailToAdmin(UserDetail customer, Order order, List<OrderedProduct> products)
+        protected void SendEmailToAdmin(UserDetail customer, Order order, List<OrderedProduct> orderedProducts)
         {
             string customerName = customer.FirstName + " " + customer.Surname;
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
             // format email for admin
 
-            string emailBody = "Email Sumbitted:" + Environment.NewLine;
+            string emailBody = "ORDER ID:" + order.Id + Environment.NewLine;
             emailBody += "FROM: " + customerName + Environment.NewLine;
-            emailBody += "REPLY TO: " + customer.Email + Environment.NewLine;
+            emailBody += "EMAIL: " + customer.Email + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "MESSAGE:" + Environment.NewLine;
-            emailBody += "Thank you for your order" + Environment.NewLine; // todo: add proper message
+            emailBody += "Ordered photos:" + Environment.NewLine;
+            emailBody += Environment.NewLine;
+            emailBody += "----------" + Environment.NewLine;
+
+            foreach (OrderedProduct orderedProduct in orderedProducts)
+            {
+                emailBody += orderedProduct.Product.Name + " (" + orderedProduct.Product.InitialHeight + " x " + orderedProduct.Product.InitialWidth + ")" + Environment.NewLine;
+                emailBody += "£" + ((decimal)orderedProduct.Product.Price).ToString("0.00") + Environment.NewLine;
+                emailBody += "----------" + Environment.NewLine;
+            }
+
+            emailBody += Environment.NewLine;
+            emailBody += "Manage orders:" + Environment.NewLine;
+            emailBody += baseUrl + ResolveUrl("~/admin/orders.aspx") + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Message sent though StunningSnaps website";
 
