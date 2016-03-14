@@ -25,9 +25,6 @@ namespace CO5027.user
                 case "logout":
                     Logout();
                     break;
-                default:
-                    //TODO redirect user if already logged in
-                    break;
             }
 
             if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
@@ -97,15 +94,13 @@ namespace CO5027.user
             string emailBody = "";
             emailBody += "Hello " + firstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "Thank you for signing up for an acount with StunningSnaps!" + Environment.NewLine;
+            emailBody += "Thank you for signing up for an account with StunningSnaps!" + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "Your username is: " + user.UserName + Environment.NewLine;
             emailBody += "Your password was set during account creation. If you need to reset your password, please follow the reset password instructions on the Login page." + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "Message sent though StunningSnaps website";
+            emailBody += "Message sent though StunningSnaps website" + Environment.NewLine;
             emailBody += baseUrl + ResolveUrl("~/");
-
-            // todo: complete email message
 
             Email.sendEmail(email, "stunningsnaps@wilk.tech", "Welcome to StunningSnaps!", emailBody);
 

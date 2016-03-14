@@ -103,7 +103,7 @@ namespace CO5027.user
 
             string emailBody = customer.FirstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "Just a quick reminder of the remaing download allowance for your photo: " + Environment.NewLine;
+            emailBody += "Just a quick reminder of the remaining download allowance for your photo: " + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "----------" + Environment.NewLine;
             emailBody += orderedProduct.Product.Name + Environment.NewLine;

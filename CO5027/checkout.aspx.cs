@@ -304,7 +304,7 @@ namespace CO5027
 
             string emailBody = customer.FirstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
-            emailBody += "Thank you for your recient order at StunningSnaps." + Environment.NewLine;
+            emailBody += "Thank you for your recent order at StunningSnaps." + Environment.NewLine;
             emailBody += "For your records, please retain a copy of this email. " + Environment.NewLine;
             emailBody += Environment.NewLine;
             emailBody += "You have purchaced:" + Environment.NewLine;
