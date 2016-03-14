@@ -16,7 +16,7 @@
                     <asp:Repeater ID="rptOrderProducts" runat="server" DataSource='<%# Eval("OrderedProducts") %>' OnItemCommand="rptOrderedProducts_ItemCommand">
                         <ItemTemplate>
                             <div class="product">
-                                <p><strong><%# Eval("Product.Name") %></strong></p>
+                                <p><strong><%# Server.HtmlEncode((string)Eval("Product.Name")) %></strong></p>
                                 <p>Remaining Downloads: <%# ((int)Eval("DownloadsAllowed") - (int)Eval("DownloadCount")) %></p>
                                 <asp:Button ID="btnAddDownload" runat="server" Text="Add Download" CommandName="AddDownload" CommandArgument='<%# Eval("Id") %>' Visible='<%# !(bool)Eval("Order.Cancelled") %>' />
                             </div>
@@ -25,5 +25,6 @@
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <asp:Literal ID="litNoOrders" runat="server" />
     </section>
 </asp:Content>

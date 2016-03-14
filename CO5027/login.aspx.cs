@@ -21,7 +21,7 @@ namespace CO5027.user
                 case "register":
                     pnlLogin.Visible = false;
                     pnlRegister.Visible = true;
-                    goto default;
+                    break;
                 case "logout":
                     Logout();
                     break;

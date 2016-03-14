@@ -22,6 +22,11 @@ namespace CO5027.admin
             DatabaseCO5027Entities db = new DatabaseCO5027Entities();
             var orders = db.Orders.OrderByDescending(o => o.DateStamp).ToList();
 
+            if (orders.Count < 1)
+            {
+                litNoOrders.Text = "<p>There are no orders.</p>";
+            }
+
             rptOrders.DataSource = orders;
             rptOrders.DataBind();
         }
