@@ -17,4 +17,19 @@ function initMap() {
     });
 
     marker.setMap(map);
+
+    // ~~~~~~~~~~
+    // Following code from (Eugenemail, 2015).
+    // ~~~~~~~~~~
+
+    google.maps.event.addDomListener(window, 'resize',
+  resize);
 }
+
+function resize() {
+    map.setCenter(map_center);
+    map.fitBounds(path_bounds);
+}
+// ~~~~~~~~~~
+// End of code from (Eugenemail, 2015). 
+// ~~~~~~~~~~

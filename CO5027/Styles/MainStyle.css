@@ -162,7 +162,7 @@ section > div {
 .email div {
   margin: 15px 5px;
 }
-.email div span {
+.form span {
   color: red;
 }
 .columns {
@@ -182,6 +182,7 @@ section > div {
 .columns .map #map {
   height: 350px;
   width: 900px;
+  max-width: 100%;
 }
 .contact-details p span {
   margin-top: 5px;

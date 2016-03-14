@@ -1,5 +1,5 @@
 ﻿// ~~~~~~~~~~
-// Muncey (2016)
+// Code taken from Muncey (2016)
 // ~~~~~~~~~~
 
 using System;

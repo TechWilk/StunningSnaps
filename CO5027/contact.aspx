@@ -18,7 +18,7 @@
                 <p>The office is open 9am - 5pm weekdays.</p>
                 <p>We aim to respond to all contact within 48 hours.</p>
             </div>
-            <div class="email">
+            <div class="email form">
                 <h3>Email</h3>
                 <asp:Panel ID="pnlContactForm" runat="server">
                     <div>

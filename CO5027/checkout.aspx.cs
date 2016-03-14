@@ -160,6 +160,10 @@ namespace CO5027
         {
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
+            // ~~~~~~~~~~
+            // Following code inspired by PayPal, (2015) and Muncey, (2016).
+            // ~~~~~~~~~~
+
             var config = ConfigManager.Instance.GetProperties();
             var accessToken = new OAuthTokenCredential(config).GetAccessToken();
             var apiContext = new APIContext(accessToken);
@@ -228,6 +232,10 @@ namespace CO5027
                     Response.Redirect(link.href);
                 }
             }
+
+            // ~~~~~~~~~~
+            // end of code inspired by PayPal, (2015) and Muncey, (2016).
+            // ~~~~~~~~~~
         }
         protected void PayPalConfirmation(string paymentId, string payerId)
         {

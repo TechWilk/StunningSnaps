@@ -38,6 +38,7 @@ namespace CO5027
             }
 
             string photoInfoFormatted = "<h3>" + Server.HtmlEncode(photo.Name) + "</h3>";
+            photoInfoFormatted += "<p>(" + photo.InitialWidth + " x " + photo.InitialHeight + ")</p>";
             photoInfoFormatted += "<p>" + Server.HtmlEncode(photo.Description) + "</p>";
 
             litPhotoInfo.Text = photoInfoFormatted;

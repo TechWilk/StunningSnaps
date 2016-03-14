@@ -6,7 +6,7 @@
     <section class="page">
         <asp:Panel ID="pnlLogin" runat="server">
             <h2>Login</h2>
-            <div class="login">
+            <div class="login form">
                 <div>
                     <asp:Literal runat="server" ID="litError" />
                 </div>
@@ -28,7 +28,7 @@
         </asp:Panel>
         <asp:Panel ID="pnlRegister" runat="server" Visible="False">
             <h2>Register</h2>
-            <div class="register">
+            <div class="register form">
                 <div>
                     <asp:Label runat="server" AssociatedControlID="txtRegisterUsername">Username</asp:Label>
                     <asp:TextBox runat="server" ID="txtRegisterUsername" />
@@ -68,7 +68,7 @@
         </asp:Panel>
         <asp:Panel ID="pnlEdit" runat="server" Visible="False">
             <h2>Change Password</h2>
-            <div class="edit">
+            <div class="edit form">
                 <asp:Panel ID="pnlEditInput" runat="server">
                     <div>
                         <asp:Label runat="server" AssociatedControlID="txtEditOldPassword">Current Password</asp:Label>

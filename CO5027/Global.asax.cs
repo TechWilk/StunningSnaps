@@ -12,6 +12,10 @@ namespace CO5027
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // ~~~~~~~~~~
+            // references code by jQuery (2016)
+            // ~~~~~~~~~~
+
             string JQueryVer = "2.1.4";
             ScriptManager.ScriptResourceMapping.AddDefinition("jquery", new ScriptResourceDefinition
             {

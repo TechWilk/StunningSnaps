@@ -6,7 +6,7 @@
     <section class="page">
         <h2>Add Image</h2>
 
-        <div>
+        <div class="form">
             <asp:Panel ID="pnlUploadControl" runat="server">
                 <div>
                     <asp:Label ID="lblPictureUpload" runat="server" Text="Upload picture" AssociatedControlID="fUplPictureUpload"></asp:Label>
