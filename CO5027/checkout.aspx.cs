@@ -280,8 +280,6 @@ namespace CO5027
             string customerName = customer.FirstName + " " + customer.Surname;
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
-            // format email for admin
-
             string emailBody = "ORDER ID:" + order.Id + Environment.NewLine;
             emailBody += "FROM: " + customerName + Environment.NewLine;
             emailBody += "EMAIL: " + customer.Email + Environment.NewLine;
@@ -305,7 +303,7 @@ namespace CO5027
 
             string subject = "New order: " + order.Id + " from: " + customerName;
 
-            // Send email to admin
+            // Send email
             Email.sendEmail("stunningsnaps@wilk.tech", customer.Email, subject, emailBody);
         }
         protected void SendEmailToCustomer(UserDetail customer, Order order, List<OrderedProduct> orderedProducts)
@@ -313,7 +311,7 @@ namespace CO5027
             string customerName = customer.FirstName + " " + customer.Surname;
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority;
 
-            // format email for admin
+            // format email
 
             string emailBody = customer.FirstName + "," + Environment.NewLine;
             emailBody += Environment.NewLine;
@@ -347,7 +345,7 @@ namespace CO5027
 
             string subject = "Thank you for your order at StunningSnaps (" + order.Id + ")";
 
-            // Send email to admin
+            // Send email
             Email.sendEmail(customer.Email, "stunningsnaps@wilk.tech", subject, emailBody);
         }
 
