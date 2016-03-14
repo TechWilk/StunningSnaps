@@ -9,29 +9,21 @@
             <asp:Panel ID="pnlBasketItems" runat="server">
                 <asp:Repeater ID="rptBasket" runat="server" OnItemCommand="rptBasket_ItemCommand">
                     <HeaderTemplate>
-                        <table>
-                            <tr>
-                                <th>Photo</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Remove</th>
-                            </tr>
+                        <ul class="photos basket">
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <tr>
-                            <td>
-                                <img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
-                                    alt="<%# Server.HtmlEncode((string)Eval("ProductDescription")) %>"
-                                    width="<%# Eval("ImageWidth") %>"
-                                    height="<%# Eval("ImageHeight") %>" /></td>
-                            <td><%# Server.HtmlEncode((string)Eval("ProductName")) %></td>
-                            <td>£<%# Server.HtmlEncode(((decimal)Eval("Price")).ToString("0.00")) %></td>
-                            <td>
-                                <asp:Button ID="btnRemove" runat="server" Text="Remove" CommandArgument='<%# Eval("Id") %>' /></td>
-                        </tr>
+                        <li>
+                            <img src='<%# ResolveUrl(Eval("ProductId", "~/files/images/watermarked/{0}-3.jpg")) %>'
+                                alt="<%# Server.HtmlEncode((string)Eval("ProductDescription")) %>"
+                                width="<%# Eval("ImageWidth") %>"
+                                height="<%# Eval("ImageHeight") %>" />
+                            <h3><%# Server.HtmlEncode((string)Eval("ProductName")) %></h3>
+                            <span>£<%# Server.HtmlEncode(((decimal)Eval("Price")).ToString("0.00")) %></span>
+                            <asp:Button ID="btnRemove" runat="server" Text="Remove" CommandArgument='<%# Eval("Id") %>' />
+                        </li>
                     </ItemTemplate>
                     <FooterTemplate>
-                        </table>
+                        </ul>
                     </FooterTemplate>
                 </asp:Repeater>
                 <asp:Button ID="btnContinue" runat="server" Text="Continue to Checkout" OnClick="btnContinue_Click" />

@@ -318,6 +318,47 @@ section > div {
     }
 }
 
+.links a {
+    display: inline-block;
+    margin: 15px 10px;
+    padding: 10px 15px;
+    border: 1px solid @linkColor;
+}
+
+ul.photos li {
+    list-style: none;
+    padding: 20px;
+    border: 2px solid @headerBackgroundColor;
+    vertical-align: top;
+    margin-bottom: 20px;
+
+    &.archived {
+        background-color: @paleGrey;
+    }
+
+    .info {
+        display: inline-block;
+    }
+
+    img {
+        max-width: 500px;
+    }
+
+    input[type=submit] {
+        width: auto;
+        display: inline-block;
+    }
+
+    h3,
+    .links {
+        display: inline-block;
+    }
+}
+
+ul.basket li {
+    width:100%;
+}
+
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

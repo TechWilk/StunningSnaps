@@ -5,7 +5,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <section class="page">
         <h2>User</h2>
-        <p><a href="~/login.aspx" runat="server">Change Password</a></p>
+        <div class="links">
+            <a href="~/login.aspx" runat="server">Change Password</a>
+        </div>
         <h3>Orders</h3>
         <div class="orders">
             <asp:Repeater ID="rptOrders" runat="server">

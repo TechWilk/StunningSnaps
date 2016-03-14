@@ -222,6 +222,39 @@ section > div {
   margin-right: 1rem;
   margin-bottom: 0;
 }
+.links a {
+  display: inline-block;
+  margin: 15px 10px;
+  padding: 10px 15px;
+  border: 1px solid #08f;
+}
+ul.photos li {
+  list-style: none;
+  padding: 20px;
+  border: 2px solid #222;
+  vertical-align: top;
+  margin-bottom: 20px;
+}
+ul.photos li.archived {
+  background-color: #f4f4f4;
+}
+ul.photos li .info {
+  display: inline-block;
+}
+ul.photos li img {
+  max-width: 500px;
+}
+ul.photos li input[type=submit] {
+  width: auto;
+  display: inline-block;
+}
+ul.photos li h3,
+ul.photos li .links {
+  display: inline-block;
+}
+ul.basket li {
+  width: 100%;
+}
 footer {
   background-color: #222;
   color: #fff;
