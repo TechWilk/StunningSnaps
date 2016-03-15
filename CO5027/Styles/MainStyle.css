@@ -230,30 +230,22 @@ section > div {
 }
 ul.photos li {
   list-style: none;
-  padding: 20px;
   border: 2px solid #222;
-  vertical-align: top;
   margin-bottom: 20px;
+  width: 100%;
 }
 ul.photos li.archived {
-  background-color: #f4f4f4;
+  background-color: #dbdbdb;
 }
 ul.photos li .info {
+  padding: 15px;
+}
+ul.photos li .info h3,
+ul.photos li .info .links {
   display: inline-block;
 }
-ul.photos li img {
-  max-width: 500px;
-}
-ul.photos li input[type=submit] {
-  width: auto;
-  display: inline-block;
-}
-ul.photos li h3,
-ul.photos li .links {
-  display: inline-block;
-}
-ul.basket li {
-  width: 100%;
+ul.photos li .info p.description {
+  display: none;
 }
 footer {
   background-color: #222;
@@ -339,6 +331,25 @@ footer nav.validation li a:hover {
   input {
     min-width: 400px;
   }
+  ul.photos li {
+    padding: 10px;
+  }
+  ul.photos li img {
+    max-width: 45%;
+  }
+  ul.photos li .info {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 15px;
+    max-width: 40%;
+  }
+  ul.photos li .info span,
+  ul.photos li .info .links {
+    display: block;
+  }
+  ul.photos li input[type=submit] {
+    margin-top: 10px;
+  }
 }
 @media (min-width: 710px) {
   header nav.main {
@@ -350,6 +361,12 @@ footer nav.validation li a:hover {
   textarea,
   input {
     max-width: 100%;
+  }
+  ul.photos li {
+    padding: 15px;
+  }
+  ul.photos li .info p.description {
+    display: block;
   }
 }
 @media (min-width: 860px) {

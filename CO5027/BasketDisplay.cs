@@ -12,6 +12,8 @@ namespace CO5027
         public int ProductId { get; set; }
         public int ImageHeight { get; set; }
         public int ImageWidth { get; set; }
+        public int InitialHeight { get; set; }
+        public int InitialWidth { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public decimal Price { get; set; }

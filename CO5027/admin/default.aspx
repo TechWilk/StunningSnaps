@@ -20,11 +20,12 @@
                     <img src="<%# Eval("Id","../files/images/watermarked/{0}-3.jpg") %>" alt="<%# HttpUtility.HtmlEncode(Eval("Description")) %>" width="<%# Eval("InitialWidth") %>" height="<%# Eval("InitialHeight") %>" />
                     <div class="info">
                         <h3><%# HttpUtility.HtmlEncode(Eval("Name")) %></h3>
+                        <p class="description"><%# HttpUtility.HtmlEncode(Eval("Description")) %></p>
                         <div class="links">
                             <a href='<%# Eval("Id", ResolveUrl("~/admin/add.aspx?id=") + "{0}") %>'>Edit</a>
                         </div>
-                        <asp:Button ID="btnArchive" runat="server" Text='<%# ((bool)Eval("Archived")) ? "Unarchive" : "Archive"  %>' CommandArgument='<%# Eval("Id") %>' />
                     </div>
+                    <asp:Button ID="btnArchive" runat="server" Text='<%# ((bool)Eval("Archived")) ? "Unarchive" : "Archive"  %>' CommandArgument='<%# Eval("Id") %>' />
                 </li>
             </ItemTemplate>
             <FooterTemplate>

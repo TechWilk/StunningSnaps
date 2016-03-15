@@ -17,8 +17,11 @@
                                 alt="<%# Server.HtmlEncode((string)Eval("ProductDescription")) %>"
                                 width="<%# Eval("ImageWidth") %>"
                                 height="<%# Eval("ImageHeight") %>" />
-                            <h3><%# Server.HtmlEncode((string)Eval("ProductName")) %></h3>
-                            <span>£<%# Server.HtmlEncode(((decimal)Eval("Price")).ToString("0.00")) %></span>
+                            <div class="info">
+                                <h3><%# Server.HtmlEncode((string)Eval("ProductName")) %></h3>
+                                <span>(<%#((int)Eval("InitialWidth")).ToString() + " x " + ((int)Eval("InitialHeight")).ToString() %>)</span>
+                                <span>£<%# Server.HtmlEncode(((decimal)Eval("Price")).ToString("0.00")) %></span>
+                            </div>
                             <asp:Button ID="btnRemove" runat="server" Text="Remove" CommandArgument='<%# Eval("Id") %>' />
                         </li>
                     </ItemTemplate>

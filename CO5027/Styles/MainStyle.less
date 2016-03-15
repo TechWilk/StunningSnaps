@@ -19,6 +19,7 @@
 @footerLinkHoverColor: lighten(@footerBackgroundColor, 10%);
 
 @paleGrey: #f4f4f4;
+@darkerGrey: darken(@paleGrey, 10%);
 
 // Mixins
 .backgroundGradient(@colorTop, @colorBottom) {
@@ -327,36 +328,26 @@ section > div {
 
 ul.photos li {
     list-style: none;
-    padding: 20px;
     border: 2px solid @headerBackgroundColor;
-    vertical-align: top;
     margin-bottom: 20px;
+    width:100%;
 
     &.archived {
-        background-color: @paleGrey;
+        background-color: @darkerGrey;
     }
 
     .info {
-        display: inline-block;
-    }
+        padding:15px;
 
-    img {
-        max-width: 500px;
-    }
+        h3,
+        .links {
+            display: inline-block;
+        }
 
-    input[type=submit] {
-        width: auto;
-        display: inline-block;
+        p.description {
+            display:none;
+        }
     }
-
-    h3,
-    .links {
-        display: inline-block;
-    }
-}
-
-ul.basket li {
-    width:100%;
 }
 
 
@@ -475,6 +466,28 @@ footer {
     input {
         min-width: 400px;
     }
+
+    ul.photos li {
+        padding:10px;
+
+        img {
+            max-width:45%;
+        }
+        .info {
+            vertical-align:top;
+            display:inline-block;
+            margin-left: 15px;
+            max-width: 40%;
+
+            span,
+            .links {
+                display:block;
+            }
+        }
+        input[type=submit] {
+            margin-top: 10px;
+        }
+    }
 }
 
 @media (min-width: 710px) {
@@ -489,6 +502,14 @@ footer {
     textarea,
     input {
         max-width: 100%;
+    }
+
+    ul.photos li {
+        padding: 15px;
+
+        .info p.description {
+            display:block;
+        }
     }
 }
 

@@ -75,6 +75,8 @@ namespace CO5027
                 basketItem.ProductName = item.Product.Name;
                 basketItem.ProductDescription = item.Product.Description;
                 basketItem.Price = (decimal)item.Product.Price;
+                basketItem.InitialHeight = item.Product.InitialHeight;
+                basketItem.InitialWidth = item.Product.InitialWidth;
 
                 var image = db.Images.Single(p => p.ProductId == item.ProductId && p.SizeId == 3);
 
