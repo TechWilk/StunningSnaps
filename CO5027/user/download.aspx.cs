@@ -84,11 +84,6 @@ namespace CO5027.user
             catch
             {
             }
-
-            // cleanup
-
-            // TODO: cleanup after download
-
         }
 
         protected void sendEmailToCustomer(OrderedProduct orderedProduct, int remainingDownloads)

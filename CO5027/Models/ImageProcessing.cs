@@ -79,6 +79,10 @@ namespace CO5027.Models
 
             int fontSize = width / 5;
 
+            // ~~~~~~~~~~
+            // code inspired by Laurelle (2011) and Dbkk (2008)
+            // ~~~~~~~~~~
+
             string text = "StunningSnaps";
             var g = Graphics.FromImage(img);
             var brush = new SolidBrush(Color.FromArgb(50, 255, 255, 255));
@@ -86,8 +90,6 @@ namespace CO5027.Models
             stringFormat.LineAlignment = StringAlignment.Center;
             stringFormat.Alignment = StringAlignment.Center;
 
-            // code based upon 
-            // todo: reference http://stackoverflow.com/questions/9747559/c-sharp-adding-string-to-image-using-the-max-font-size
             while (true)
             {
                 var testFont = new Font(FontFamily.GenericSansSerif, fontSize);
@@ -104,11 +106,14 @@ namespace CO5027.Models
 
                 testFont.Dispose();
             }
-            // end of code based upon
 
             var font = new Font(FontFamily.GenericSansSerif, fontSize);
 
             g.DrawString(text, font, brush, (width / 2), (height / 2), stringFormat);
+
+            // ~~~~~~~~~~
+            // end of code inspired by Laurelle (2011) and Dbkk (2008)
+            // ~~~~~~~~~~
 
             g.Dispose();
             return img;
